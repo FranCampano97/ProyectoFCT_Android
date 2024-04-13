@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690361260419",
+    "project_id": "proyectofct-fran",
+    "storage_bucket": "proyectofct-fran.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690361260419:android:e792474c0b701b3b06beb6",
+        "android_client_info": {
+          "package_name": "com.example.proyectofct"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ1q3-az2IzeFwsptWaXPrE0rFL_z8K3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="15dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.view.Fragment.DetallesFragment">
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:id="@+id/tvCAU"
+        style="@style/tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cau" />
+
+    <EditText
+        android:id="@+id/etCAU"
+        style="@style/etDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="prueba" />
+
+    <TextView
+        android:id="@+id/tvestadosolicitud"
+        style="@style/tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/estado_solicitud" />
+
+    <EditText
+        android:id="@+id/etestadosolicitud"
+        style="@style/etDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_informacion" />
+
+    <TextView
+        android:id="@+id/tvtipoAutoconsumo"
+        style="@style/tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tipo_autoconsumo" />
+
+    <EditText
+        android:id="@+id/tipoAutoconsumo"
+        style="@style/etDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvcompensacionExcedentes"
+        style="@style/tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compensacion_excedentes" />
+
+    <EditText
+        android:id="@+id/compensacionExcedentes"
+        style="@style/etDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvpotenciaInstalacion"
+        style="@style/tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/potencia_instalacion" />
+
+    <EditText
+        android:id="@+id/potenciaInstalacion"
+        style="@style/etDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

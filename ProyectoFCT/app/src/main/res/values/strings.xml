@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">ProyectoFCT</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!--Login -->
+    <string name="usuario">Usuario</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciarSesion">Entrar</string>
+    <string name="registrar">Registrarte</string>
+    <string name="olvidoDatos">He olvidado mis datos</string>
+    <string name="recordarpass">Recordar contraseña</string>
+    <string name="tambien_puedes">También puedes</string>
+    <!--Pantalla Principal -->
+    <string name="titulo_pantallaPrincipal">Prácticas Android</string>
+    <string name="practica_1">Práctica 1</string>
+    <string name="practica_2">Práctica 2</string>
+
+    <!--Pantalla listado facturas -->
+    <string name="consumo">Consumo</string>
+    <string name="facturas">Facturas</string>
+
+    <!--Pantalla filtrar facturas -->
+    <string name="filtrar_facturas">Filtrar Facturas</string>
+    <string name="fecha_emision">Con fecha de emisión</string>
+    <string name="desde">Desde:</string>
+    <string name="dia_mes">día/mes/año</string>
+    <string name="hasta">Hasta:</string>
+    <string name="por_un_importe">Por un importe</string>
+    <string name="por_estado">Por estado</string>
+    <string name="pagadas">Pagadas</string>
+    <string name="anuladas">Anuladas</string>
+    <string name="pendientes_de_pago">Pendientes de pago</string>
+    <string name="plan_de_pago">Plan de pago</string>
+    <string name="btn_aplicar">Aplicar</string>
+    <string name="eliminar_filtros">Eliminar filtros</string>
+    <string name="atras">Atrás</string>
+    <string name="smart_solar">Smart Solar</string>
+    <!-- Pantalla Smart Solar -->
+    <string name="mi_instalacion">Mi instalación</string>
+    <string name="energia">Energia</string>
+    <string name="detalles">Detalles</string>
+    <string name="texto_instalacion">Aquí tienes los datos de tu instalación fotovoltaica en tiempo real</string>
+    <string name="texto_energia">Estamos trabajando en mejorar la App. Tus paneles solares siguen produciendo, en breve podrás seguir viendo tu producción solar. Sentimos las molestias</string>
+    <string name="cau">CAU(Código Autoconsumo)</string>
+    <string name="estado_solicitud">Estado solicitud alta autoconsumidor</string>
+    <string name="tipo_autoconsumo">Tipo autoconsumo</string>
+    <string name="compensacion_excedentes">Compensación de excedentes</string>
+    <string name="potencia_instalacion">Potencia de instalacion</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilo para el boton de Registrar -->
+    <style name="boton_login_registrate">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:backgroundTint">#1ED1D0CE</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_marginLeft">40dp</item>
+         <item name="android:layout_marginRight">40dp</item>
+         <item name="android:layout_marginTop">16dp</item>
+        <item name="android:elevation">0dp</item>
+
+
+    </style>
+    <style name="CustomOutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/green</item> <!-- Color del texto verde -->
+        <item name="android:backgroundTint">#19D6D1D1</item> <!-- Color del fondo del botón -->
+        <item name="strokeColor">@color/green</item> <!-- Color del borde verde -->
+        <item name="strokeWidth">3dp</item> <!-- Grosor del borde en dp -->
+
+    </style>
+
+
+    <style name="GreenCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="colorSecondary">@color/green</item> <!-- Este color es para el borde cuando está activado -->
+    </style>
+
+
+<!--Estilo para textview pantalla de Detalles. Smart Solar -->
+    <style name="tvDetalles">
+        <item name="android:textColor">#C3403E3E</item>
+    </style>
+
+    <!--Estilo para edittext pantalla de Detalles. Smart Solar -->
+    <style name="etDetalles">
+        <item name="android:textColor">#C30C0C0C</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+</resources>
