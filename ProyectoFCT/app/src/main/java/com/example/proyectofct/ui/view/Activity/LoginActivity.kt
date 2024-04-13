@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnInicioSesion.setOnClickListener {
             //    user = binding.etEmail.text.toString()
             //  pass = binding.etPassword.text.toString()
-            //iniciarUsuario(user, pass)
+            iniciarUsuario(user, pass)
             val intent = Intent(this, PantallaPrincipalActivity::class.java)
             startActivity(intent)
 
