@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,6 +41,10 @@ android {
         viewBinding = true
     }
 
+
+    kapt{
+        correctErrorTypes=true
+    }
 }
 
 dependencies {
@@ -62,4 +68,7 @@ dependencies {
     implementation(libs.converter.gson)
     //Corrutinas
     implementation(libs.kotlinx.coroutines.android)
+    //dagger hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 }

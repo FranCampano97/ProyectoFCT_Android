@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivityFacturaListBinding
 import com.example.proyectofct.databinding.ActivityFiltrarFacturasBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FiltrarFacturasActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFiltrarFacturasBinding
     override fun onCreate(savedInstanceState: Bundle?) {

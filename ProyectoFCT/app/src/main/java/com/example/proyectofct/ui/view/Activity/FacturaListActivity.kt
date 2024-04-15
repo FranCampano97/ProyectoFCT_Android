@@ -13,11 +13,13 @@ import com.example.proyectofct.core.RetrofitHelper
 import com.example.proyectofct.data.model.FacturaAdapter
 import com.example.proyectofct.data.network.FacturaService
 import com.example.proyectofct.databinding.ActivityFacturaListBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 
+@AndroidEntryPoint
 class FacturaListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFacturaListBinding
     private lateinit var retrofit: Retrofit
@@ -41,14 +43,17 @@ class FacturaListActivity : AppCompatActivity() {
         binding.progressbar.isVisible = true
 
         CoroutineScope(Dispatchers.IO).launch {
+
             val response = facturaService.CargarFacturas()
+
             runOnUiThread {
                 if (response != null) {
                     Log.i("TAG", response.toString())
                     adapter.updateList(response.facturas)
                     binding.progressbar.isVisible = false
+                } else {
+                    Log.i("TAG", "no funciona ya")
                 }
-
             }
         }
 

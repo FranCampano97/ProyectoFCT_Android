@@ -8,7 +8,9 @@ import com.example.proyectofct.R
 import com.example.proyectofct.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SmartSolarActivity : AppCompatActivity() {
     private lateinit var adaptador: FragmentStateAdapter
     private lateinit var tablayout: TabLayout

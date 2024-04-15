@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivityPantallaPrincipalBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PantallaPrincipalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPantallaPrincipalBinding
     override fun onCreate(savedInstanceState: Bundle?) {

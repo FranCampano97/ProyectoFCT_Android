@@ -1,5 +1,6 @@
 package com.example.proyectofct.data.network
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.example.proyectofct.core.RetrofitHelper
 import com.example.proyectofct.data.model.Results
@@ -18,7 +19,6 @@ class FacturaService {
             retrofit.create(ApiService::class.java).getFacturas()
 
         if (myResponse.isSuccessful) {
-            Log.i("fran", "funciona")
             val response: Results? = myResponse.body()
             //si no es null, en el hilo principal actualizamos la lista y quitamos la barra de cargando.
             if (response != null) {
@@ -28,7 +28,6 @@ class FacturaService {
             }
 
         }
-
         return null
     }
 

@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofct.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -27,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnInicioSesion.setOnClickListener {
             //    user = binding.etEmail.text.toString()
             //  pass = binding.etPassword.text.toString()
-            iniciarUsuario(user, pass)
+            //iniciarUsuario(user, pass)
             val intent = Intent(this, PantallaPrincipalActivity::class.java)
             startActivity(intent)
 
