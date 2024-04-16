@@ -18,14 +18,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FacturaListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFacturaListBinding
-    private lateinit var retrofit: Retrofit
     private lateinit var adapter: FacturaAdapter
-    val facturaService = FacturaService()
 
+    @Inject
+    lateinit var facturaService: FacturaService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFacturaListBinding.inflate(layoutInflater)
@@ -45,11 +46,12 @@ class FacturaListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
 
             val response = facturaService.CargarFacturas()
+            Log.i("FRAN", "estoy en initUI.CargarFacturas()")
 
             runOnUiThread {
                 if (response != null) {
                     Log.i("TAG", response.toString())
-                    adapter.updateList(response.facturas)
+                    adapter.updateList(response)
                     binding.progressbar.isVisible = false
                 } else {
                     Log.i("TAG", "no funciona ya")

@@ -11,10 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 
 interface ApiService {
-
     @GET("facturas")
     suspend fun getFacturas(): Response<Results>
-
-
-
 }

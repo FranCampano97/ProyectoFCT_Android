@@ -42,8 +42,8 @@ android {
     }
 
 
-    kapt{
-        correctErrorTypes=true
+    kapt {
+        correctErrorTypes = true
     }
 }
 
@@ -71,4 +71,7 @@ dependencies {
     //dagger hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-compiler:2.51.1")
+    //Room
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 }
