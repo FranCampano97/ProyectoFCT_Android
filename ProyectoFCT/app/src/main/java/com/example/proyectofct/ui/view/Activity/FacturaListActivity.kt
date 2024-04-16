@@ -13,6 +13,8 @@ import com.example.proyectofct.core.RetrofitHelper
 import com.example.proyectofct.data.model.FacturaAdapter
 import com.example.proyectofct.data.network.FacturaService
 import com.example.proyectofct.databinding.ActivityFacturaListBinding
+import com.example.proyectofct.domain.GetFacturasUseCase
+import com.example.proyectofct.domain.model.toFacturaModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +28,7 @@ class FacturaListActivity : AppCompatActivity() {
     private lateinit var adapter: FacturaAdapter
 
     @Inject
-    lateinit var facturaService: FacturaService
+    lateinit var getFacturasUseCase: GetFacturasUseCase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFacturaListBinding.inflate(layoutInflater)
@@ -44,14 +46,12 @@ class FacturaListActivity : AppCompatActivity() {
         binding.progressbar.isVisible = true
 
         CoroutineScope(Dispatchers.IO).launch {
-
-            val response = facturaService.CargarFacturas()
-            Log.i("FRAN", "estoy en initUI.CargarFacturas()")
-
+            //llamo a mi caso de uso.
+            val response = getFacturasUseCase.invoke()
             runOnUiThread {
                 if (response != null) {
                     Log.i("TAG", response.toString())
-                    adapter.updateList(response)
+                    adapter.updateList(response.map { it.toFacturaModel() })
                     binding.progressbar.isVisible = false
                 } else {
                     Log.i("TAG", "no funciona ya")
@@ -63,9 +63,8 @@ class FacturaListActivity : AppCompatActivity() {
             intent = Intent(this, FiltrarFacturasActivity::class.java)
             startActivity(intent)
         }
-        binding.icBack.setOnClickListener {
-            intent = Intent(this, PantallaPrincipalActivity::class.java)
-            startActivity(intent)
+        binding.btnBack.setOnClickListener {
+            finish()
         }
     }
 

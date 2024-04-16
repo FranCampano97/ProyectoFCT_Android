@@ -49,11 +49,13 @@
         </FrameLayout>
 
         <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/rememberPass"
             style="style/GreenCheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/recordarpass"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:checked="false"/>
 
 
         <TextView

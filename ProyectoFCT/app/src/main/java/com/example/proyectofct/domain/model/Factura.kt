@@ -15,3 +15,5 @@ data class Factura(
 fun FacturaModel.toDomain() = Factura(estado, importe, fecha)
 
 fun Entity.toDomain() = Factura(estado, importe, fecha)
+
+fun Factura.toFacturaModel() = FacturaModel(estado, importe, fecha)

@@ -1,6 +1,8 @@
 package com.example.proyectofct.ui.view.Activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -9,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -27,24 +30,30 @@ class LoginActivity : AppCompatActivity() {
         this.setContentView(binding.root)
 
         binding.btnInicioSesion.setOnClickListener {
-            //    user = binding.etEmail.text.toString()
-            //  pass = binding.etPassword.text.toString()
-            //iniciarUsuario(user, pass)
-            val intent = Intent(this, PantallaPrincipalActivity::class.java)
-            startActivity(intent)
-
+            user = binding.etEmail.text.toString()
+            pass = binding.etPassword.text.toString()
+            iniciarUsuario(user, pass)
         }
 
         binding.btnRegistrar.setOnClickListener {
-
             user = binding.etEmail.text.toString()
             pass = binding.etPassword.text.toString()
-
             registrarUsuario(user, pass)
         }
 
         binding.icOjoPass.setOnClickListener {
             showPass(binding.etPassword)
+        }
+        binding.rememberPass.setOnClickListener {
+            if (binding.rememberPass.isChecked) {
+                user = binding.etEmail.text.toString()
+                pass = binding.etPassword.text.toString()
+                rememberPass(user,pass)
+            }
+            else if(!binding.rememberPass.isChecked){
+                cerrarSesion()
+                Log.i("PASS","No esta true")
+            }
         }
 
     }
@@ -88,6 +97,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun cerrarSesion() {
         FirebaseAuth.getInstance().signOut()
+        val prefs: SharedPreferences.Editor? =
+            getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+            ).edit()
+        if (prefs != null) {
+            prefs.clear()
+            prefs.apply()
+            binding.etPassword.setText("")
+        }
     }
 
     private fun errorAlert() {
@@ -121,5 +140,18 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    private fun rememberPass(email: String, pass: String) {
+        val prefs: SharedPreferences.Editor? =
+            getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+            ).edit()
+        if (prefs != null) {
+            prefs.putString("email", email)
+            prefs.putString("pass", pass)
+            prefs.apply()
+        }
+
+    }
 
 }

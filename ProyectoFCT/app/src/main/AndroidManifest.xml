@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ProyectoFCTApp"
@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFCT"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.view.Fragment.DatePickerFragment"
+            android:exported="false" />
         <activity
             android:name=".ui.view.Activity.SignupActivity"
             android:exported="false" />

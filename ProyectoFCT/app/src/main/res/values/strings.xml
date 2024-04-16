@@ -53,5 +53,7 @@
     <string name="tipo_autoconsumo">Tipo autoconsumo</string>
     <string name="compensacion_excedentes">Compensación de excedentes</string>
     <string name="potencia_instalacion">Potencia de instalacion</string>
+    <string name="preference_file_key">com.example.proyectofct.PREFERENCE_FILE_KEY</string>
+        />
 
 </resources>

@@ -21,6 +21,7 @@ class PantallaPrincipalActivity : AppCompatActivity() {
         binding.icPractica1.setOnClickListener {
             intent = Intent(this, FacturaListActivity::class.java)
             startActivity(intent)
+
         }
         binding.icPractica2.setOnClickListener {
             intent = Intent(this, SmartSolarActivity::class.java)

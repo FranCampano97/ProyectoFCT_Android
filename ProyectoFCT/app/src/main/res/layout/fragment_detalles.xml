@@ -10,11 +10,11 @@
     tools:context=".ui.view.Fragment.DetallesFragment">
 
     <TextView
-        android:layout_marginTop="25dp"
         android:id="@+id/tvCAU"
         style="@style/tvDetalles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:text="@string/cau" />
 
     <EditText
@@ -31,12 +31,23 @@
         android:layout_height="wrap_content"
         android:text="@string/estado_solicitud" />
 
-    <EditText
-        android:id="@+id/etestadosolicitud"
-        style="@style/etDetalles"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/ic_informacion" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etestadosolicitud"
+            style="@style/etDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/opacity"
+            android:src="@drawable/ic_informacion" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tvtipoAutoconsumo"

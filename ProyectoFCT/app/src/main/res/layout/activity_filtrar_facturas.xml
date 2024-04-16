@@ -23,7 +23,7 @@
 
 
             <ImageButton
-                android:id="@+id/ic_cancelar"
+                android:id="@+id/btn_cancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -73,6 +73,7 @@
                     android:text="@string/desde" />
 
                 <Button
+                    android:id="@+id/btnDesde"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#C6D5D5"
@@ -91,6 +92,7 @@
                     android:text="@string/hasta" />
 
                 <Button
+                    android:id="@+id/btnHasta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#C6D5D5"
