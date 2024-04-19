@@ -21,6 +21,7 @@
     <string name="titulo_pantallaPrincipal">Prácticas Android</string>
     <string name="practica_1">Práctica 1</string>
     <string name="practica_2">Práctica 2</string>
+    <string name="navegacion">Navegación</string>
 
     <!--Pantalla listado facturas -->
     <string name="consumo">Consumo</string>
@@ -54,6 +55,13 @@
     <string name="compensacion_excedentes">Compensación de excedentes</string>
     <string name="potencia_instalacion">Potencia de instalacion</string>
     <string name="preference_file_key">com.example.proyectofct.PREFERENCE_FILE_KEY</string>
-        />
+
+    <!-- Pantalla Navegación -->
+    <string name="titulo_navegacion">Desde una aplicación Android, se puede acceder a páginas webs, mediante el navegador externo o mediante Webviews.</string>
+    <string name="abrir_navegador_externo">Abrir navegador externo</string>
+    <string name="abrir_webview">Abrir Webview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    />
 
 </resources>

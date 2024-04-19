@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         this.setContentView(binding.root)
+        session()
 
         binding.btnInicioSesion.setOnClickListener {
             user = binding.etEmail.text.toString()
@@ -46,13 +47,18 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.rememberPass.setOnClickListener {
             if (binding.rememberPass.isChecked) {
+                Log.i("PASS", "------esta true")
                 user = binding.etEmail.text.toString()
                 pass = binding.etPassword.text.toString()
-                rememberPass(user,pass)
-            }
-            else if(!binding.rememberPass.isChecked){
-                cerrarSesion()
-                Log.i("PASS","No esta true")
+                if (user.isNotEmpty() && pass.isNotEmpty()) {
+                    rememberPass(user, pass, binding.rememberPass.isChecked)
+                } else {
+                    errorRelleneAmbos()
+                    binding.rememberPass.isChecked=false
+                }
+            } else if (!binding.rememberPass.isChecked) {
+                borrarCredenciales()
+                Log.i("PASS", "No esta true")
             }
         }
 
@@ -95,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun cerrarSesion() {
+    private fun borrarCredenciales() {
         FirebaseAuth.getInstance().signOut()
         val prefs: SharedPreferences.Editor? =
             getSharedPreferences(
@@ -105,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
         if (prefs != null) {
             prefs.clear()
             prefs.apply()
-            binding.etPassword.setText("")
         }
     }
 
@@ -113,6 +118,15 @@ class LoginActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
         builder.setMessage("Se produjo un error con sus credenciales")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun errorRelleneAmbos() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Debe rellenar ambos campos")
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -136,11 +150,28 @@ class LoginActivity : AppCompatActivity() {
             editTextPassword.transformationMethod =
                 HideReturnsTransformationMethod.getInstance()
         }
-
-
     }
 
-    private fun rememberPass(email: String, pass: String) {
+    private fun session() {
+        val prefs: SharedPreferences? =
+            getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+            )
+        val email = prefs?.getString("email", null)
+        val pass = prefs?.getString("pass", null)
+        val isChecked = prefs?.getBoolean("isChecked", false)
+        if (email != null && pass != null && isChecked != null) {
+            binding.etEmail.setText(email)
+            binding.etPassword.setText(pass)
+            binding.rememberPass.isChecked = isChecked
+            Log.i("PASS", "El email: $email y la pass: $pass")
+        } else {
+            Log.i("PASS", "El email: $email y la pass: $pass")
+        }
+    }
+
+    private fun rememberPass(email: String, pass: String, isChecked: Boolean) {
         val prefs: SharedPreferences.Editor? =
             getSharedPreferences(
                 getString(R.string.preference_file_key),
@@ -149,9 +180,9 @@ class LoginActivity : AppCompatActivity() {
         if (prefs != null) {
             prefs.putString("email", email)
             prefs.putString("pass", pass)
+            prefs.putBoolean("isChecked", isChecked)
             prefs.apply()
         }
-
     }
 
 }

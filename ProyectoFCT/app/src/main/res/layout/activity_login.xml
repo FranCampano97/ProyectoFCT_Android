@@ -53,9 +53,9 @@
             style="style/GreenCheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:text="@string/recordarpass"
-            android:textStyle="bold"
-            android:checked="false"/>
+            android:textStyle="bold" />
 
 
         <TextView

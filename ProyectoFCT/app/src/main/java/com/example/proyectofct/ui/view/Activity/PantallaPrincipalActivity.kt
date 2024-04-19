@@ -27,6 +27,12 @@ class PantallaPrincipalActivity : AppCompatActivity() {
             intent = Intent(this, SmartSolarActivity::class.java)
             startActivity(intent)
         }
+
+        binding.icNavegacion.setOnClickListener {
+            intent = Intent(this, NavegadorActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 }

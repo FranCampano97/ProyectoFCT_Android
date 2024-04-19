@@ -26,6 +26,7 @@
 
     <style name="GreenCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="colorSecondary">@color/green</item> <!-- Este color es para el borde cuando está activado -->
+
     </style>
 
 
