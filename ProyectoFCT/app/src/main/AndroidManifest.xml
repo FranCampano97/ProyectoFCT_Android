@@ -8,13 +8,14 @@
         android:name=".ProyectoFCTApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_iberdrola"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_iberdrola"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFCT"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity
             android:name=".ui.view.Activity.NavegadorActivity"
             android:exported="false" />

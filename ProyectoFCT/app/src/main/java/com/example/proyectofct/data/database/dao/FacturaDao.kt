@@ -19,4 +19,8 @@ interface FacturaDao {
     //borrar todas las facturas.
     @Query("DELETE FROM factura_table")
     suspend fun clearFacturas()
+
+    //FILTRADO
+    @Query("SELECT * FROM factura_table WHERE descEstado = :estado")
+    suspend fun getFacturasPorEstado(estado: String): List<Entity>
 }

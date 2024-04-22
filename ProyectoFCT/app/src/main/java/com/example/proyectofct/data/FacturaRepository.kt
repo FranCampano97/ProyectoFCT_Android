@@ -30,4 +30,11 @@ class FacturaRepository @Inject constructor(
     suspend fun clearFacturas() {
         facturaDao.clearFacturas()
     }
+
+    //FILTRADO
+    suspend fun getFacturasPorEstado(estado: String): List<Factura> {
+        val response: List<Entity> = facturaDao.getFacturasPorEstado(estado)
+        return response.map { it.toDomain() }
+    }
+
 }

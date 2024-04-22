@@ -23,4 +23,9 @@ class GetFacturasUseCase @Inject constructor(private val repository: FacturaRepo
             repository.getAllFacturasFromDatabase()
         }
     }
+
+    suspend fun getFacturasPorEstado(estado: String): List<Factura> {
+        return repository.getFacturasPorEstado(estado)
+    }
+
 }

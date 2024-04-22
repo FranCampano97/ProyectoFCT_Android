@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/facturaListActivity2">
+    <activity
+        android:id="@+id/facturaListActivity2"
+        android:name="com.example.proyectofct.ui.view.Activity.FacturaListActivity"
+        android:label="activity_factura_list"
+        tools:layout="@layout/activity_factura_list" />
+    <fragment
+        android:id="@+id/filtrarFacturasFragment2"
+        android:name="com.example.proyectofct.ui.view.Fragment.FiltrarFacturasFragment"
+        android:label="fragment_filtrar_facturas"
+        tools:layout="@layout/fragment_filtrar_facturas" />
+</navigation>

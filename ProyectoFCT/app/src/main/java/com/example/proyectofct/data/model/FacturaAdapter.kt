@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectofct.R
+import com.example.proyectofct.data.database.entities.Entity
 
 class FacturaAdapter(
     var facturasLista: List<FacturaModel> = emptyList(),
@@ -39,6 +40,8 @@ class FacturaAdapter(
         //y notifica que los datos han sido cambiados.Esta función ya está creada por defecto.
         notifyDataSetChanged()
     }
+
+
 
 
 }
