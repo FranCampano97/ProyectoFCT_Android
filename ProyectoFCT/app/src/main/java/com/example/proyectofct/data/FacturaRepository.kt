@@ -37,4 +37,11 @@ class FacturaRepository @Inject constructor(
         return response.map { it.toDomain() }
     }
 
+
+    suspend fun getFacturasPorImporte(importe: Double): List<Factura>{
+        val response: List<Entity> = facturaDao.getFacturasPorImporte(importe)
+        return response.map{it.toDomain()}
+    }
+
+
 }

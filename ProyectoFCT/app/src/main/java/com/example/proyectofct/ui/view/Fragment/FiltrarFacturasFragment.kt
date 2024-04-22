@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.proyectofct.R
+import com.example.proyectofct.data.model.FacturaAdapter
 import com.example.proyectofct.databinding.FragmentFiltrarFacturasBinding
 import com.example.proyectofct.ui.view.Activity.FacturaListActivity
 import com.example.proyectofct.ui.viewModel.FacturaListViewModel
@@ -24,6 +25,7 @@ class FiltrarFacturasFragment : Fragment() {
     private var _binding: FragmentFiltrarFacturasBinding? = null
     val binding get() = _binding!!
     private val viewModel: FacturaListViewModel by activityViewModels()
+    private lateinit var adapter: FacturaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,11 +72,11 @@ class FiltrarFacturasFragment : Fragment() {
                     .show()
                 Log.e("FILTRADO", "Error al obtener las facturas por estado", e)
             }
-          /*  val b= requireActivity().findViewById<FragmentContainerView>(R.id.container_view)
-            val c= requireActivity().findViewById<LinearLayout>(R.id.contenido)
-            b.visibility=View.GONE
-            c.visibility=View.VISIBLE
-*/
+            /*  val b= requireActivity().findViewById<FragmentContainerView>(R.id.container_view)
+              val c= requireActivity().findViewById<LinearLayout>(R.id.contenido)
+              b.visibility=View.GONE
+              c.visibility=View.VISIBLE
+  */
 
         }
 
