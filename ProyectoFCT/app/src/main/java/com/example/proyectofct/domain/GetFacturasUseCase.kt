@@ -10,7 +10,6 @@ class GetFacturasUseCase @Inject constructor(private val repository: FacturaRepo
 
     //primero cargaré el listado de facturas desde la Api
     // y en caso de que no se pueda, cargaré la que haya en la BBDD
-
     suspend operator fun invoke(): List<Factura> {
         val facturas = repository.getAllFacturasFromApi()
         return if (facturas.isNotEmpty()) {
@@ -24,8 +23,5 @@ class GetFacturasUseCase @Inject constructor(private val repository: FacturaRepo
         }
     }
 
-    suspend fun getFacturasPorEstado(estado: String): List<Factura> {
-        return repository.getFacturasPorEstado(estado)
-    }
 
 }

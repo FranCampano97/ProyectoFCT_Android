@@ -30,7 +30,7 @@ class FacturaAdapter(
 
     override fun onBindViewHolder(holder: FacturasViewHolder, position: Int) {
         val item = facturasLista[position]
-        holder.bind(item,onItemSelected)
+        holder.bind(item, onItemSelected)
     }
 
 
@@ -41,7 +41,10 @@ class FacturaAdapter(
         notifyDataSetChanged()
     }
 
-
-
+    fun getMaxImporte(): Float {
+        return if (facturasLista.isNotEmpty()) {
+            facturasLista.maxOf { it.importe }.toFloat()
+        } else 0.0f
+    }
 
 }

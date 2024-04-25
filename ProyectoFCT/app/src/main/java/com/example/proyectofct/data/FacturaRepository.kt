@@ -31,17 +31,4 @@ class FacturaRepository @Inject constructor(
         facturaDao.clearFacturas()
     }
 
-    //FILTRADO
-    suspend fun getFacturasPorEstado(estado: String): List<Factura> {
-        val response: List<Entity> = facturaDao.getFacturasPorEstado(estado)
-        return response.map { it.toDomain() }
-    }
-
-
-    suspend fun getFacturasPorImporte(importe: Double): List<Factura>{
-        val response: List<Entity> = facturaDao.getFacturasPorImporte(importe)
-        return response.map{it.toDomain()}
-    }
-
-
 }

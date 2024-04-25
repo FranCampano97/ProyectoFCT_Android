@@ -29,6 +29,7 @@ import com.example.proyectofct.ui.viewModel.FacturaListViewModel
 class FacturaListFragment : Fragment() {
     private var _binding: FragmentFacturaListBinding? = null
     private var primeravez = true
+
     val binding get() = _binding!!
     private lateinit var adapter: FacturaAdapter
     val viewModel: FacturaListViewModel by activityViewModels()

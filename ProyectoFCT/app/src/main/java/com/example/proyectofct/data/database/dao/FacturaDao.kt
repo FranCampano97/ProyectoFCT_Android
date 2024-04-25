@@ -25,5 +25,6 @@ interface FacturaDao {
     suspend fun getFacturasPorEstado(estado: String): List<Entity>
 
     @Query("SELECT * FROM factura_table WHERE importeOrdenacion BETWEEN 0 AND :importe")
-    suspend fun getFacturasPorImporte(importe: Double): List<Entity>
+    suspend fun getFacturasPorImporte(importe: Int): List<Entity>
+
 }
