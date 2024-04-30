@@ -4,6 +4,7 @@ import com.example.proyectofct.data.database.dao.FacturaDao
 import com.example.proyectofct.data.database.entities.Entity
 import com.example.proyectofct.data.model.FacturaModel
 import com.example.proyectofct.data.network.FacturaService
+import com.example.proyectofct.data.network.MockService
 import com.example.proyectofct.domain.model.Factura
 import com.example.proyectofct.domain.model.toDomain
 import javax.inject.Inject
@@ -11,7 +12,8 @@ import javax.inject.Inject
 class FacturaRepository @Inject constructor(
 
     private val api: FacturaService,
-    private val facturaDao: FacturaDao
+    private val facturaDao: FacturaDao,
+    private val mockService: MockService
 ) {
     suspend fun getAllFacturasFromApi(): List<Factura> {
         val response: List<FacturaModel> = api.CargarFacturas()
@@ -31,4 +33,14 @@ class FacturaRepository @Inject constructor(
         facturaDao.clearFacturas()
     }
 
+
+
+    suspend fun getAllFacturasFromMock(): List<Factura> {
+        val response: List<FacturaModel> = mockService.getFacturasMock()
+        return response.map { it.toDomain() }
+    }
+
+    suspend fun getPrecioMayor():Float{
+        return facturaDao.getPrecioMasAlto()
+    }
 }

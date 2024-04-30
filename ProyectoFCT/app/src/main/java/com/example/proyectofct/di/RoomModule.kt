@@ -26,4 +26,7 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideFacturaDao(db: facturaDatabase) = db.getFacturaDao()
+
+
+
 }

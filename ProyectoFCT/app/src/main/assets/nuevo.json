@@ -1,0 +1,80 @@
+{
+  "numFacturas": 15,
+  "facturas": [
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 110.25,
+      "fecha": "15/09/2024"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 80.50,
+      "fecha": "20/10/2024"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 45.75,
+      "fecha": "05/11/2024"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 90.80,
+      "fecha": "10/12/2024"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 60.30,
+      "fecha": "18/01/2025"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 75.00,
+      "fecha": "22/02/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 40.20,
+      "fecha": "30/03/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 55.90,
+      "fecha": "05/04/2025"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 120.75,
+      "fecha": "10/05/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 85.40,
+      "fecha": "20/06/2025"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 95.60,
+      "fecha": "25/07/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 70.15,
+      "fecha": "30/08/2025"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 130.20,
+      "fecha": "05/09/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 50.75,
+      "fecha": "10/10/2025"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 35.90,
+      "fecha": "15/11/2025"
+    }
+  ]
+}

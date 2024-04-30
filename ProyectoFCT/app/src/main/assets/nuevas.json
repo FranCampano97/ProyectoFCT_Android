@@ -1,0 +1,30 @@
+{
+  "numFacturas": 5,
+  "facturas": [
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 100.50,
+      "fecha": "15/03/2022"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 75.25,
+      "fecha": "20/04/2022"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 50.75,
+      "fecha": "10/01/2022"
+    },
+    {
+      "descEstado": "Pendiente de pago",
+      "importeOrdenacion": 120.30,
+      "fecha": "05/07/2021"
+    },
+    {
+      "descEstado": "Pagada",
+      "importeOrdenacion": 80.90,
+      "fecha": "22/09/2021"
+    }
+  ]
+}

@@ -62,9 +62,11 @@ class FacturaListFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             viajarActivity(PantallaPrincipalActivity())
         }
-
+        val usarMock =
+            arguments?.getBoolean("mock", false) ?: false // Obtener el valor del switch del bundle
+        Log.i("mock", "valor del switch: $usarMock")
         if (primeravez) {
-            viewModel.obtenerFacturas()
+            viewModel.obtenerFacturas(usarMock)
             primeravez = false
         }
 
@@ -75,7 +77,11 @@ class FacturaListFragment : Fragment() {
             binding.progressbar.isVisible = false
             Log.d("facturas", "Ha entrado en el observer")
             Log.d("facturas", "facturas de viewmodel: ${facturas.toString()}")
+            if (facturas.isEmpty()) {
+                binding.txtNoResultados.isVisible = true
+                Log.d("facturas", "ta vaciaaaaaaaaa")
 
+            }
         })
     }
 

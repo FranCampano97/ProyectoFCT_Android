@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import androidx.room.RoomDatabase
 import com.example.proyectofct.R
+import com.example.proyectofct.data.FacturaRepository
 import com.example.proyectofct.data.database.dao.FacturaDao
 import com.example.proyectofct.data.database.facturaDatabase
 import com.example.proyectofct.data.model.FacturaAdapter
@@ -39,13 +40,9 @@ class FiltrarFacturasFragment : Fragment() {
     private val viewModel: FacturaListViewModel by activityViewModels()
     private lateinit var adapter: FacturaAdapter
 
-    @Inject
-    lateinit var getFacturasUseCase: GetFacturasUseCase
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
 
@@ -61,24 +58,35 @@ class FiltrarFacturasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var importe: Float = 0f
-        /*  CoroutineScope(Dispatchers.Main).launch {
-                  val database = RoomModule.provideRoom(requireActivity())
-                  val facturaDao = RoomModule.provideFacturaDao(database)
-                  facturaDao.getAllFacturas()
-                  Log.i("facturas", "la lista de filtrar es: $listaFacturas")
-          }*/
+        var importeMayor: Float = 0f
         binding.btnCancelar.setOnClickListener {
+            requireActivity().onBackPressed()
         }
-
+        binding.btnEliminarFiltros.setOnClickListener {
+            binding.btnDesde.setText(R.string.dia_mes)
+            binding.btnHasta.setText(R.string.dia_mes)
+            binding.checkPendientes.isChecked = false
+            binding.checkPagadas.isChecked = false
+            binding.rangeSlider.setValues(0.0f)
+        }
         binding.btnDesde.setOnClickListener {
             showPickerDialog(true)
         }
         binding.btnHasta.setOnClickListener {
             showPickerDialog(false)
         }
+        binding.rangeSlider.valueFrom = 0f
 
+        CoroutineScope(Dispatchers.IO).launch {
+            importeMayor = viewModel.getPrecioMayor()
+            binding.rangeSlider.valueTo = importeMayor
+            binding.precioSeleccionado.setText("0 € - $importeMayor €")
+            // binding.rangeSlider.setValues(0f, importeMayor)
+        }
         binding.rangeSlider.addOnChangeListener { slider, _, _ ->
             importe = slider.values[0].toFloat()
+            val precio = importe.toString()
+            binding.precioSeleccionado.setText("$precio € - $importeMayor €")
             Log.i("facturas", "El valor del rangeSlider es: $importe")
         }
 
@@ -87,7 +95,6 @@ class FiltrarFacturasFragment : Fragment() {
             val desdeDate: Date?
             val hastaDate: Date?
 
-            Log.i("facturas","las fechas: ${binding.btnDesde.text.toString()}, ${binding.btnHasta.text.toString()}")
 
             if (binding.btnDesde.text.toString() != getString(R.string.dia_mes)) {
                 desdeDate = formatoFecha.parse(binding.btnDesde.text.toString())
@@ -95,13 +102,14 @@ class FiltrarFacturasFragment : Fragment() {
             if (binding.btnHasta.text.toString() != getString(R.string.dia_mes)) {
                 hastaDate = formatoFecha.parse(binding.btnHasta.text.toString())
             } else hastaDate = null
-Log.i("facturas","desde es: $desdeDate,  hasta es: $hastaDate")
             viewModel.filtrado(
                 importe,
                 binding.checkPagadas.isChecked,
                 binding.checkPendientes.isChecked,
                 desdeDate,
-                hastaDate)
+                hastaDate
+            )
+            requireActivity().onBackPressed()
         }
     }
 

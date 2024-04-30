@@ -55,7 +55,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.annotation)
+    //firebase
     implementation(libs.firebase.auth.ktx)
+    implementation ("com.google.firebase:firebase-config-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,5 +82,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     implementation(libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    //RetroMock
+    implementation("co.infinum:retromock:1.1.1")
 }

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.ProyectoFCT"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".ui.view.Activity.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.Activity.NavegadorActivity"
             android:exported="false" />
         <activity
@@ -27,9 +30,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.Activity.SmartSolarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view.Activity.FiltrarFacturasActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.Activity.FacturaListActivity"

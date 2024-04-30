@@ -59,6 +59,7 @@
 
 
         <TextView
+            android:id="@+id/olvidadoDatos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/olvidoDatos"
@@ -78,12 +79,38 @@
                 android:text="@string/iniciarSesion" />
 
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:gravity="center_horizontal"
-                android:text="@string/tambien_puedes" />
+                android:layout_marginVertical="8dp">
+
+                <TextView
+                    android:id="@+id/tvText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:text="@string/tambien_puedes"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/tvText"
+                    android:background="@color/black"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/tvText"
+                    android:background="@color/black"
+                    />
+
+            </RelativeLayout>
 
 
             <Button

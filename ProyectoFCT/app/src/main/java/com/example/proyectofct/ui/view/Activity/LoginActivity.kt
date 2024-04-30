@@ -3,6 +3,7 @@ package com.example.proyectofct.ui.view.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivityLoginBinding
+import com.example.proyectofct.domain.LoginUseCase
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,25 +25,29 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var user: String
     private lateinit var pass: String
+    private lateinit var loginUseCase: LoginUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loginUseCase = LoginUseCase()
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         this.setContentView(binding.root)
         session()
-
+        binding.olvidadoDatos.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.btnInicioSesion.setOnClickListener {
             user = binding.etEmail.text.toString()
             pass = binding.etPassword.text.toString()
-            //iniciarUsuario(user, pass)
-            val intent = Intent(this, PantallaPrincipalActivity::class.java)
+
+            loginUseCase.iniciarUsuario(user, pass, this)
+        }
+        binding.olvidadoDatos.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
-
         binding.btnRegistrar.setOnClickListener {
-            user = binding.etEmail.text.toString()
-            pass = binding.etPassword.text.toString()
-            registrarUsuario(user, pass)
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
         }
 
         binding.icOjoPass.setOnClickListener {
@@ -56,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     rememberPass(user, pass, binding.rememberPass.isChecked)
                 } else {
                     errorRelleneAmbos()
-                    binding.rememberPass.isChecked=false
+                    binding.rememberPass.isChecked = false
                 }
             } else if (!binding.rememberPass.isChecked) {
                 borrarCredenciales()
@@ -64,43 +70,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun registrarUsuario(email: String, password: String) {
-
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        showHome()
-                        Log.d("TAG", "Registro exitoso")
-
-                    } else {
-                        errorAlert()
-                        Log.d("TAG", "Error al registrar: ${task.exception?.message}")
-
-                    }
-                }
-        }
-    }
-
-
-    private fun iniciarUsuario(email: String, password: String) {
-
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        showHome()
-                        Log.d("TAG", "Login exitoso")
-
-                    } else {
-                        errorAlert()
-                        Log.d("TAG", "Error al logear: ${task.exception?.message}")
-
-                    }
-                }
-        }
     }
 
     private fun borrarCredenciales() {
@@ -116,15 +85,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun errorAlert() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Se produjo un error con sus credenciales")
-        builder.setPositiveButton("Aceptar", null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
     private fun errorRelleneAmbos() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -132,11 +92,6 @@ class LoginActivity : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    private fun showHome() {
-        val intent = Intent(this, PantallaPrincipalActivity::class.java)
-        startActivity(intent)
     }
 
     private fun showPass(editTextPassword: TextInputEditText) {

@@ -36,7 +36,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FacturaListActivity : AppCompatActivity() {
-     lateinit var binding: ActivityFacturaListBinding
+    lateinit var binding: ActivityFacturaListBinding
     private lateinit var adapter: FacturaAdapter
 
     @Inject
@@ -49,22 +49,24 @@ class FacturaListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFacturaListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val usarMock = intent.getBooleanExtra("mock", false)
 
         initUI()
         val fragment = FacturaListFragment()
-        // Obtener el FragmentManager
         val fragmentManager = supportFragmentManager
-        // Comenzar una transacción de fragmento
+        val bundle = Bundle()
+        bundle.putBoolean("mock", usarMock)
+        fragment.arguments = bundle
+
         val transaction = fragmentManager.beginTransaction()
-        // Reemplazar el contenido actual del FragmentContainerView con el Fragment
         transaction.replace(R.id.container_view, fragment)
-        // Realizar la transacción
         transaction.commit()
 
     }
+
     private fun initUI() {
 
-        binding.containerView.visibility=View.VISIBLE
+        binding.containerView.visibility = View.VISIBLE
 
 
     }

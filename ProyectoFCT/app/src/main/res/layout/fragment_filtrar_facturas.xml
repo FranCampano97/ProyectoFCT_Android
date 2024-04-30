@@ -122,10 +122,12 @@
                 android:text="@string/por_un_importe" />
 
             <TextView
+                android:id="@+id/precioSeleccionado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                tools:text="precio seleccionado" />
+                tools:text="precio seleccionado"
+                android:textColor="@color/green"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -152,9 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:stepSize="1"
-                android:valueFrom="0"
-                android:valueTo="100" />
+                android:stepSize="0.01" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"

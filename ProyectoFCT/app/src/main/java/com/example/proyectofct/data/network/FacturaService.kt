@@ -25,7 +25,10 @@ class FacturaService @Inject constructor(private val api: ApiService) {
                     val body = response.body()?.facturas
                     body ?: emptyList()
                 } else {
-                    Log.e("FRAN", "Response unsuccessful: ${response.code()} - ${response.message()}")
+                    Log.e(
+                        "FRAN",
+                        "Response unsuccessful: ${response.code()} - ${response.message()}"
+                    )
                     emptyList()
                 }
             } catch (e: Exception) {

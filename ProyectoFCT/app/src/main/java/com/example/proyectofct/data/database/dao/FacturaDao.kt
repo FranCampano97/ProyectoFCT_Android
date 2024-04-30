@@ -27,4 +27,9 @@ interface FacturaDao {
     @Query("SELECT * FROM factura_table WHERE importeOrdenacion BETWEEN 0 AND :importe")
     suspend fun getFacturasPorImporte(importe: Int): List<Entity>
 
+    //valor mayor
+    @Query("SELECT MAX(importeOrdenacion) FROM factura_table")
+    suspend fun getPrecioMasAlto(): Float
+
+
 }

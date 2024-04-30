@@ -10,4 +10,13 @@
         <item name="android:statusBarColor">@color/opacity</item>
 
     </style>
+
+    <style name="Theme.Secundario" parent="Base.Theme.ProyectoFCT">
+        <item name="colorPrimary">#F44336</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#E91E63</item>
+        <item name="android:background">#2F98AA</item>
+
+    </style>
+
 </resources>

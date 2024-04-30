@@ -2,6 +2,7 @@ package com.example.proyectofct.ui.viewModel
 
 import android.util.Log
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,8 +33,8 @@ class FacturaListViewModel @Inject constructor(
         Log.d("facturas", "FacturaListViewModel_init")
 
         CoroutineScope(Dispatchers.IO).launch {
-            facturasLista = getFacturasUseCase.invoke().map { it.toDatabase() }
-            Log.i("facturas", "$facturasLista")
+            facturasLista = getFacturasUseCase.invoke(false).map { it.toDatabase() }
+            Log.i("facturas", "la primera vez $facturasLista")
         }
     }
 
@@ -44,14 +45,16 @@ class FacturaListViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun obtenerFacturas() {
+    fun obtenerFacturas(mock: Boolean) {
         Log.d("LISTA", "ENTRA EN OBTENER")
         viewModelScope.launch {
             try {
-                val facturasResult = getFacturasUseCase.invoke()
+                val facturasResult = getFacturasUseCase.invoke(mock)
+                facturasLista = facturasResult.map { it.toDatabase() }
                 _facturas.value = facturasResult
             } catch (e: Exception) {
                 _error.value = "Error al obtener las facturas: ${e.message}"
+                Log.e("FRAN", "Error al obtener las facturas: ${e.message}")
             }
         }
     }
@@ -90,15 +93,20 @@ class FacturaListViewModel @Inject constructor(
 
 
             val porChecks = if (!pendiente && pagada && i.estado == "Pagada") {
+                Log.i("facturas","entro en la 1 de pagada")
                 true
             } else if (!pagada && pendiente && i.estado == "Pendiente de pago") {
+                Log.i("facturas","entro en la 2 de pendiente de pago")
                 true
             } else {
                 false
             }
 
             //si es por importe solamente.
-            //  if(porImporte && !porChecks && !cumpleFechas){listaFiltrada.add(i)}
+            if (porImporte && dentroRango && !porChecks && !porBotones && !cumpleFechas ) {
+                Log.i("facturas","tambien entro aqui jejeje")
+                listaFiltrada.add(i)
+            }
 
             //si cumpleFecha solamente.
             if (cumpleFechas && !porChecks && !porImporte && !porBotones) {
@@ -114,7 +122,7 @@ class FacturaListViewModel @Inject constructor(
             }
 
             //si cumple porChecks solamente.
-            if (porChecks && !porImporte && !cumpleFechas && !porFecha) {
+            if (porChecks && porBotones && !porImporte && !cumpleFechas && !porFecha) {
                 Log.i("facturas", "entra en cumplechecks solamente")
                 Log.i("facturas", "el porChecks es: $porChecks")
                 listaFiltrada.add(i)
@@ -127,14 +135,21 @@ class FacturaListViewModel @Inject constructor(
             }
 
             //Filtrado por importe y checks.
-            if (porImporte && porChecks && dentroRango && !cumpleFechas && !porFecha) {
+            if (porImporte && porChecks && porBotones && dentroRango && !cumpleFechas && !porFecha) {
                 Log.i("facturas", "entra en cumplechecks y importe. fecha: $cumpleFechas")
+                Log.i(
+                    "facturas","por importe: $porImporte, por checks: $porChecks,  por botones: $porBotones, dentrorango: $dentroRango"
+                )
                 listaFiltrada.add(i)
             }
             //Filtrado por importe, checks y fecha.
             if (porImporte && porChecks && dentroRango && cumpleFechas) {
                 Log.i("facturas", "entra en cumplechecks, importe y fecha.")
                 listaFiltrada.add(i)
+            }
+
+            if (listaFiltrada.isEmpty()) {
+                Log.i("noHay", "no hay facturas.")
             }
         }
         Log.i("facturas", "listado filtrado: $listaFiltrada")
@@ -144,4 +159,7 @@ class FacturaListViewModel @Inject constructor(
     }
 
 
+    suspend fun getPrecioMayor(): Float {
+        return getFacturasUseCase.getPrecioMayor()
+    }
 }

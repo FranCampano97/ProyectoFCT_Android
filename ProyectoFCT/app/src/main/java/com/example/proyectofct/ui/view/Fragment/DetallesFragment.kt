@@ -1,62 +1,55 @@
 package com.example.proyectofct.ui.view.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import co.infinum.retromock.meta.Mock
 import com.example.proyectofct.R
+import com.example.proyectofct.data.model.Details
+import com.example.proyectofct.data.network.MockService
+import com.example.proyectofct.data.network.RetroMockService
+import com.example.proyectofct.databinding.FragmentDetallesBinding
+import com.example.proyectofct.databinding.FragmentFiltrarFacturasBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetallesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class DetallesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private var _binding: FragmentDetallesBinding? = null
+    val binding get() = _binding!!
+    @Inject
+    lateinit var mockService: MockService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalles, container, false)
+        _binding = FragmentDetallesBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetallesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetallesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            val response: Details? = mockService.getDetails()
+            if (response != null) {
+                binding.etCAU.setText(response.cau)
+                binding.etestadosolicitud.setText(response.estadoSolicitud)
+                binding.tipoAutoconsumo.setText(response.tipo)
+                binding.compensacionExcedentes.setText(response.excedentes)
+                binding.potenciaInstalacion.setText(response.potencia)
+
+
             }
+        }
     }
+
 }
