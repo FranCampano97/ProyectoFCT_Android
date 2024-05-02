@@ -102,13 +102,15 @@ class FiltrarFacturasFragment : Fragment() {
             if (binding.btnHasta.text.toString() != getString(R.string.dia_mes)) {
                 hastaDate = formatoFecha.parse(binding.btnHasta.text.toString())
             } else hastaDate = null
-            viewModel.filtrado(
+
+            viewModel.filtrar(
                 importe,
                 binding.checkPagadas.isChecked,
                 binding.checkPendientes.isChecked,
                 desdeDate,
                 hastaDate
             )
+
             requireActivity().onBackPressed()
         }
     }

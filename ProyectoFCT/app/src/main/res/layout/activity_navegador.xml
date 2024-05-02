@@ -8,11 +8,33 @@
     android:orientation="vertical"
     tools:context=".ui.view.Activity.NavegadorActivity">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_nav_before" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/atras"
+            android:textColor="@color/green"
+            android:textSize="15sp" />
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="20dp"
         android:text="@string/titulo_navegacion" />
 
     <Button
@@ -35,5 +57,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="35dp"
-        android:background="@color/green"/>
+        android:background="@color/green" />
 </LinearLayout>

@@ -13,6 +13,9 @@ data class Entity(
     @ColumnInfo(name = "descEstado") val estado: String,
     @ColumnInfo(name = "importeOrdenacion") val importe: Float,
     @ColumnInfo(name = "fecha") val fecha: String
-)
+) {
+    fun toFactura() = Factura(estado = estado, importe = importe, fecha = fecha)
+}
 
 fun Factura.toDatabase() = Entity(estado = estado, importe = importe, fecha = fecha)
+

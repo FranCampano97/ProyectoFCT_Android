@@ -29,6 +29,9 @@ class NavegadorActivity : AppCompatActivity() {
             binding.webviewBien.loadUrl("https://www.iberdrola.es")
             binding.webviewBien.visibility = View.VISIBLE
         }
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
     }
 }

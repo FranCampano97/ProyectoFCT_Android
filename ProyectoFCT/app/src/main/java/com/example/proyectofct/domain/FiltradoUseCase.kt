@@ -1,86 +1,24 @@
-package com.example.proyectofct.ui.viewModel
+package com.example.proyectofct.domain
 
 import android.util.Log
-import android.widget.CheckBox
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.proyectofct.R
 import com.example.proyectofct.data.FacturaRepository
 import com.example.proyectofct.data.database.entities.Entity
 import com.example.proyectofct.data.database.entities.toDatabase
-import com.example.proyectofct.domain.FiltradoUseCase
-import com.example.proyectofct.domain.GetFacturasUseCase
 import com.example.proyectofct.domain.model.Factura
-import com.example.proyectofct.domain.model.toDomain
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@HiltViewModel
-class FacturaListViewModel @Inject constructor(
-    private val getFacturasUseCase: GetFacturasUseCase,
-    private val filtradoUseCase: FiltradoUseCase,
-    private val repository: FacturaRepository
-) : ViewModel() {
-
-    init {
-        Log.d("facturas", "FacturaListViewModel_init")
-        CoroutineScope(Dispatchers.IO).launch {
-            facturasLista = getFacturasUseCase.invoke(false).map { it.toDatabase() }
-            Log.i("facturas", "la primera vez $facturasLista")
-        }
-    }
-
-    private val _facturas = MutableLiveData<List<Factura>>()
-    val facturas: LiveData<List<Factura>> = _facturas
-    private lateinit var facturasLista: List<Entity>
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
-    fun obtenerFacturas(mock: Boolean) {
-        Log.d("LISTA", "ENTRA EN OBTENER")
-        viewModelScope.launch {
-            try {
-                val facturasResult = getFacturasUseCase.invoke(mock)
-                facturasLista = facturasResult.map { it.toDatabase() }
-                _facturas.value = facturasResult
-            } catch (e: Exception) {
-                _error.value = "Error al obtener las facturas: ${e.message}"
-                Log.e("FRAN", "Error al obtener las facturas: ${e.message}")
-            }
-        }
-    }
-
-    fun filtrar(
+class FiltradoUseCase @Inject constructor(private val repository: FacturaRepository) {
+    suspend fun filtrado(
         importe: Float,
         pagada: Boolean,
         pendiente: Boolean,
         desde: Date?,
         hasta: Date?
-    ) {
-        viewModelScope.launch {
-            try {
-                val facturasFiltradas =
-                    filtradoUseCase.filtrado(importe, pagada, pendiente, desde, hasta)
-                _facturas.value = facturasFiltradas
-            } catch (e: Exception) {
-                _error.value = "Error al filtrar las facturas: ${e.message}"
-                Log.e("FRAN", "Error al filtrar las facturas: ${e.message}")
-            }
-        }
-    }
-
-
-    fun filtrado(importe: Float, pagada: Boolean, pendiente: Boolean, desde: Date?, hasta: Date?) {
+    ): List<Factura> {
+        val facturasLista = repository.getAllFacturasFromDatabase().map { it.toDatabase() }
         val listaFiltrada = mutableListOf<Entity>()
         val formatoFecha = SimpleDateFormat("dd/MM/yyyy")
         var porImporte = false
@@ -173,14 +111,11 @@ class FacturaListViewModel @Inject constructor(
                 Log.i("noHay", "no hay facturas.")
             }
         }
-        Log.i("facturas", "listado filtrado: $listaFiltrada")
-        viewModelScope.launch {
-            _facturas.value = listaFiltrada.map { it.toDomain() }
-        }
+
+
+        return listaFiltrada.toList().map { it.toFactura() }
+
     }
 
 
-    suspend fun getPrecioMayor(): Float {
-        return getFacturasUseCase.getPrecioMayor()
-    }
 }

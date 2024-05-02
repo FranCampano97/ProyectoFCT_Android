@@ -71,7 +71,7 @@ class FacturaListFragment : Fragment() {
         }
 
         // Observa el LiveData en el ViewModel
-        viewModel.facturas.observe(requireActivity(), Observer { facturas ->
+        viewModel.facturas.observe(viewLifecycleOwner, Observer { facturas ->
             // Actualiza la interfaz de usuario con la nueva lista de facturas
             adapter.updateList(facturas.map { it.toFacturaModel() })
             binding.progressbar.isVisible = false
@@ -81,7 +81,7 @@ class FacturaListFragment : Fragment() {
                 binding.txtNoResultados.isVisible = true
                 Log.d("facturas", "ta vaciaaaaaaaaa")
 
-            }
+            } else binding.txtNoResultados.isVisible = false
         })
     }
 

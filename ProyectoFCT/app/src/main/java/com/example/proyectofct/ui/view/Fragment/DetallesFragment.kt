@@ -5,6 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import co.infinum.retromock.meta.Mock
@@ -22,11 +25,13 @@ import javax.inject.Inject
 class DetallesFragment : Fragment() {
     private var _binding: FragmentDetallesBinding? = null
     val binding get() = _binding!!
+
     @Inject
     lateinit var mockService: MockService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,10 +51,28 @@ class DetallesFragment : Fragment() {
                 binding.tipoAutoconsumo.setText(response.tipo)
                 binding.compensacionExcedentes.setText(response.excedentes)
                 binding.potenciaInstalacion.setText(response.potencia)
-
-
             }
         }
+
+        binding.iconoInfo.setOnClickListener {
+            mostrarPopup()
+        }
+
+
     }
 
+   private fun mostrarPopup() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.popup_details, null)
+        val botonAceptar = dialogView.findViewById<Button>(R.id.btnAceptar)
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+        val dialog = builder.create()
+
+        botonAceptar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }
