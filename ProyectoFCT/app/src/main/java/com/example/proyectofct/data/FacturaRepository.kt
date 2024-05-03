@@ -14,33 +14,32 @@ class FacturaRepository @Inject constructor(
     private val api: FacturaService,
     private val facturaDao: FacturaDao,
     private val mockService: MockService
-) {
-    suspend fun getAllFacturasFromApi(): List<Factura> {
+) : Repository {
+    override suspend fun getAllFacturasFromApi(): List<Factura> {
         val response: List<FacturaModel> = api.CargarFacturas()
         return response.map { it.toDomain() }
     }
 
-    suspend fun getAllFacturasFromDatabase(): List<Factura> {
+    override suspend fun getAllFacturasFromDatabase(): List<Factura> {
         val response: List<Entity> = facturaDao.getAllFacturas()
         return response.map { it.toDomain() }
     }
 
-    suspend fun insertFacturas(facturas: List<Entity>) {
+    override suspend fun insertFacturas(facturas: List<Entity>) {
         facturaDao.insertAll(facturas)
     }
 
-    suspend fun clearFacturas() {
+    override suspend fun clearFacturas() {
         facturaDao.clearFacturas()
     }
 
 
-
-    suspend fun getAllFacturasFromMock(): List<Factura> {
+    override suspend fun getAllFacturasFromMock(): List<Factura> {
         val response: List<FacturaModel> = mockService.getFacturasMock()
         return response.map { it.toDomain() }
     }
 
-    suspend fun getPrecioMayor():Float{
+    override suspend fun getPrecioMayor(): Float {
         return facturaDao.getPrecioMasAlto()
     }
 }

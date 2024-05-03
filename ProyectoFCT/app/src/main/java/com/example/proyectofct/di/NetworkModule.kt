@@ -5,7 +5,12 @@ import android.content.Context
 import co.infinum.retromock.Retromock
 import co.infinum.retromock.create
 import com.example.proyectofct.core.ResourceBodyFactory
+import com.example.proyectofct.data.FacturaRepository
+import com.example.proyectofct.data.Repository
+import com.example.proyectofct.data.database.dao.FacturaDao
 import com.example.proyectofct.data.network.ApiService
+import com.example.proyectofct.data.network.FacturaService
+import com.example.proyectofct.data.network.MockService
 import com.example.proyectofct.data.network.RetroMockService
 import com.example.proyectofct.ui.view.Activity.FacturaListActivity
 import dagger.Module
@@ -62,5 +67,15 @@ object NetworkModule {
     @ActivityContext
     fun provideContext(activity: FacturaListActivity): Context {
         return activity
+    }
+
+
+    @Provides
+    fun provideRepository(
+        api: FacturaService,
+        facturaDao: FacturaDao,
+        mockService: MockService
+    ): Repository {
+        return FacturaRepository(api, facturaDao, mockService)
     }
 }

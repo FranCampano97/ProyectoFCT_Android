@@ -1,3 +1,5 @@
+import com.android.builder.model.TestOptions
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -36,11 +38,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions{
+        unitTests.isReturnDefaultValues=true
+    }
 
     buildFeatures {
         viewBinding = true
     }
-
 
     kapt {
         correctErrorTypes = true
@@ -48,7 +52,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -86,4 +89,7 @@ dependencies {
 
     //RetroMock
     implementation("co.infinum:retromock:1.1.1")
+
+    //mockito
+    testImplementation ("org.mockito:mockito-core:3.+")
 }
