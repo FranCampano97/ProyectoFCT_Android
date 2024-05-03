@@ -12,41 +12,36 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class PantallaPrincipalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPantallaPrincipalBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        remoteConfig()
         super.onCreate(savedInstanceState)
+        remoteConfig()
         binding = ActivityPantallaPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
     }
 
-
-
     private fun initUI() {
-
         binding.icPractica1.setOnClickListener {
             intent = Intent(this, FacturaListActivity::class.java)
             intent.putExtra("mock", binding.switchMock.isChecked)
             startActivity(intent)
-
         }
         binding.icPractica2.setOnClickListener {
             intent = Intent(this, SmartSolarActivity::class.java)
             startActivity(intent)
         }
-
         binding.icNavegacion.setOnClickListener {
             intent = Intent(this, NavegadorActivity::class.java)
             startActivity(intent)
         }
-
     }
 
-    private fun remoteConfig(){
+    private fun remoteConfig() {
         //remote config
         val configSettings: FirebaseRemoteConfigSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 10
@@ -64,14 +59,20 @@ class PantallaPrincipalActivity : AppCompatActivity() {
                     binding.txtPractica1.setText(getString(R.string.funcion_no_disponible))
                 } else binding.icPractica1.isVisible = true
 
+
                 if (tema) {
                     Log.i("tema", "tema secundario")
                     setTheme(R.style.Theme_Secundario)
+                    Log.d("tema", this.theme.toString())
                 } else {
                     setTheme(R.style.Theme_ProyectoFCT)
                     Log.i("tema", "tema normal")
                 }
+                val rootView = window.decorView.rootView
+                rootView.invalidate()
+
             }
         }
+
     }
 }

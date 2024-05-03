@@ -11,7 +11,6 @@ class GetFacturasUseCase @Inject constructor(private val repository: FacturaRepo
 
     //primero cargaré el listado de facturas desde la Api
     // y en caso de que no se pueda, cargaré la que haya en la BBDD
-
     /*
     suspend operator fun invoke(switch: Boolean): List<Factura> {
         if (!switch) {
@@ -29,33 +28,32 @@ class GetFacturasUseCase @Inject constructor(private val repository: FacturaRepo
             val facturas = repository.getAllFacturasFromMock()
             facturas
         }
-
     }
 */
 
 
     suspend operator fun invoke(switch: Boolean): List<Factura> {
-    return if (!switch) {
-        val facturas = repository.getAllFacturasFromApi()
-        if (facturas.isNotEmpty()) {
-            Log.i("FRAN", "Cargué de la API")
+        return if (!switch) {
+            val facturas = repository.getAllFacturasFromApi()
+            if (facturas.isNotEmpty()) {
+                Log.i("FRAN", "Cargué de la API")
+                repository.clearFacturas()
+                repository.insertFacturas(facturas.map { it.toDatabase() })
+                repository.getAllFacturasFromDatabase()
+            } else {
+                Log.i("FRAN", "Cargué de la BBDD")
+                repository.getAllFacturasFromDatabase()
+            }
+        } else {
+            Log.i("FRAN", "Cargué del Mock")
+            val facturas = repository.getAllFacturasFromMock()
             repository.clearFacturas()
             repository.insertFacturas(facturas.map { it.toDatabase() })
-            repository.getAllFacturasFromDatabase()
-        } else {
-            Log.i("FRAN", "Cargué de la BBDD")
-            repository.getAllFacturasFromDatabase()
+            facturas
         }
-    } else {
-        Log.i("FRAN", "Cargué del Mock")
-        val facturas = repository.getAllFacturasFromMock()
-        repository.clearFacturas()
-        repository.insertFacturas(facturas.map { it.toDatabase() })
-        facturas
     }
-}
 
-suspend fun getPrecioMayor():Float{
-    return repository.getPrecioMayor()
-}
+    suspend fun getPrecioMayor(): Float {
+        return repository.getPrecioMayor()
+    }
 }

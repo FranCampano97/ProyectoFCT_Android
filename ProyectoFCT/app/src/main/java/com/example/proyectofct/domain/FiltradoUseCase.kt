@@ -61,7 +61,7 @@ class FiltradoUseCase @Inject constructor(private val repository: FacturaReposit
             }
 
             //si es por importe solamente.
-            if (porImporte && dentroRango && !porChecks && !porBotones && !cumpleFechas) {
+            if (porImporte && dentroRango && !porChecks && !porBotones && !cumpleFechas && !porFecha) {
                 Log.i("facturas", "tambien entro aqui jejeje")
                 listaFiltrada.add(i)
             }
