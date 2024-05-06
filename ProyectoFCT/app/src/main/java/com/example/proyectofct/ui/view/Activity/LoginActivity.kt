@@ -28,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginUseCase: LoginUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        loginUseCase = LoginUseCase()
+        val firebaseAuth = FirebaseAuth.getInstance()
+        loginUseCase = LoginUseCase(firebaseAuth)
 
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)

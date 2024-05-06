@@ -9,30 +9,6 @@ import javax.inject.Inject
 
 
 class GetFacturasUseCase @Inject constructor(private val repository: Repository) {
-
-    //primero cargaré el listado de facturas desde la Api
-    // y en caso de que no se pueda, cargaré la que haya en la BBDD
-    /*
-    suspend operator fun invoke(switch: Boolean): List<Factura> {
-        if (!switch) {
-            val facturas = repository.getAllFacturasFromApi()
-            return if (facturas.isNotEmpty()) {
-                Log.i("FRAN", "Cargué de la API")
-                repository.clearFacturas()
-                repository.insertFacturas(facturas.map { it.toDatabase() })
-                facturas
-            } else {
-                Log.i("FRAN", "Cargué de la BBDD")
-                repository.getAllFacturasFromDatabase()
-            }
-        } else {
-            val facturas = repository.getAllFacturasFromMock()
-            facturas
-        }
-    }
-*/
-
-
     suspend operator fun invoke(switch: Boolean): List<Factura> {
         return if (!switch) {
             val facturas = repository.getAllFacturasFromApi()

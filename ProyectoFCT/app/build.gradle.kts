@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation ("com.google.firebase:firebase-config-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation(libs.core.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

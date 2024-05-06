@@ -14,11 +14,13 @@ class GetFacturasUseCaseTest {
     @Mock
     lateinit var repository: Repository
     lateinit var facturaUseCase: GetFacturasUseCase
+
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
         facturaUseCase = GetFacturasUseCase(repository)
     }
+
     @Test
     fun `when switch is true, should return facturas from mock`() {
         runBlocking {
@@ -36,7 +38,6 @@ class GetFacturasUseCaseTest {
             assertEquals(facturasFromMock, result)
         }
     }
-
 
     @Test
     fun `when no facturas from API, should return facturas from database`() {
@@ -56,4 +57,21 @@ class GetFacturasUseCaseTest {
             assertEquals(facturasFromDatabase, result)
         }
     }
+
+    @Test
+    fun `when no facturas from API or database, should return empty list`() {
+        runBlocking {
+            // Arrange
+            `when`(repository.getAllFacturasFromApi()).thenReturn(emptyList())
+            `when`(repository.getAllFacturasFromDatabase()).thenReturn(emptyList())
+
+            // Act
+            val result = facturaUseCase.invoke(false)
+
+            // Assert
+            assertEquals(emptyList<Factura>(), result)
+        }
+    }
+
+
 }

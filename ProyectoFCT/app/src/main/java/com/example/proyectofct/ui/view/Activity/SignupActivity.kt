@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivitySignupBinding
 import com.example.proyectofct.domain.LoginUseCase
+import com.example.proyectofct.domain.RegisterUseCase
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,14 +23,14 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var user: String
     private lateinit var pass: String
-    private lateinit var loginUseCase: LoginUseCase
+    private lateinit var registerUseCase: RegisterUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loginUseCase = LoginUseCase()
-
+        val firebaseAuth = FirebaseAuth.getInstance()
+        registerUseCase = RegisterUseCase(firebaseAuth)
         binding.btnInicioSesion.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -40,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
             pass = binding.etPasswordNuevo.text.toString()
             if (user.isNotEmpty() && pass.isNotEmpty()) {
 
-                loginUseCase.registrarUsuario(user, pass, this)
+                registerUseCase.registrarUsuario(user, pass, this)
             } else {
                 errorRelleneAmbos()
             }

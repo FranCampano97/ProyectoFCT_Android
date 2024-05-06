@@ -21,7 +21,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loginUseCase = LoginUseCase()
+        val firebaseAuth = FirebaseAuth.getInstance()
+        loginUseCase = LoginUseCase(firebaseAuth)
 
         binding.btnInicio.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
