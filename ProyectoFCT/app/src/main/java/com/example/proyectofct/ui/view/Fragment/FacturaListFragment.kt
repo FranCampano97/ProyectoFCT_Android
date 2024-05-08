@@ -4,26 +4,22 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyectofct.R
 import com.example.proyectofct.data.model.FacturaAdapter
 import com.example.proyectofct.databinding.FragmentFacturaListBinding
-import com.example.proyectofct.databinding.FragmentFiltrarFacturasBinding
-import com.example.proyectofct.domain.model.Factura
 import com.example.proyectofct.domain.model.toFacturaModel
-import com.example.proyectofct.ui.view.Activity.FacturaListActivity
 import com.example.proyectofct.ui.view.Activity.PantallaPrincipalActivity
-import com.example.proyectofct.ui.view.Activity.SmartSolarActivity
 import com.example.proyectofct.ui.viewModel.FacturaListViewModel
+import kotlinx.coroutines.launch
 
 
 class FacturaListFragment : Fragment() {
@@ -65,24 +61,27 @@ class FacturaListFragment : Fragment() {
         val usarMock =
             arguments?.getBoolean("mock", false) ?: false // Obtener el valor del switch del bundle
         Log.i("mock", "valor del switch: $usarMock")
+
+
+        // Observa el LiveData en el ViewModel
+        lifecycleScope.launch {
+            viewModel.facturas.collect() { facturas ->
+                adapter.updateList(facturas.map { it.toFacturaModel() })
+                if (!primeravez) {
+                    binding.progressbar.isVisible = false
+                }
+                Log.d("facturas", "Ha entrado en el observer")
+                Log.d("facturas", "facturas de viewmodel: ${facturas.toString()}")
+                if (facturas.isEmpty() && !primeravez) {
+                    binding.txtNoResultados.isVisible = true
+                    Log.d("facturas", "ta vaciaaaaaaaaa")
+                } else binding.txtNoResultados.isVisible = false
+            }
+        }
         if (primeravez) {
             viewModel.obtenerFacturas(usarMock)
             primeravez = false
         }
-
-        // Observa el LiveData en el ViewModel
-        viewModel.facturas.observe(viewLifecycleOwner, Observer { facturas ->
-            // Actualiza la interfaz de usuario con la nueva lista de facturas
-            adapter.updateList(facturas.map { it.toFacturaModel() })
-            binding.progressbar.isVisible = false
-            Log.d("facturas", "Ha entrado en el observer")
-            Log.d("facturas", "facturas de viewmodel: ${facturas.toString()}")
-            if (facturas.isEmpty()) {
-                binding.txtNoResultados.isVisible = true
-                Log.d("facturas", "ta vaciaaaaaaaaa")
-
-            } else binding.txtNoResultados.isVisible = false
-        })
     }
 
 

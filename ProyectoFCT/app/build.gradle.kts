@@ -93,4 +93,7 @@ dependencies {
 
     //mockito
     testImplementation ("org.mockito:mockito-core:3.+")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+
 }

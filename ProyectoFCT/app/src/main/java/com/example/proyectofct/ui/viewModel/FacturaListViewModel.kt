@@ -1,48 +1,40 @@
 package com.example.proyectofct.ui.viewModel
 
 import android.util.Log
-import android.widget.CheckBox
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.proyectofct.R
-import com.example.proyectofct.data.FacturaRepository
-import com.example.proyectofct.data.database.entities.Entity
-import com.example.proyectofct.data.database.entities.toDatabase
 import com.example.proyectofct.domain.FiltradoUseCase
 import com.example.proyectofct.domain.GetFacturasUseCase
 import com.example.proyectofct.domain.model.Factura
-import com.example.proyectofct.domain.model.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @HiltViewModel
 class FacturaListViewModel @Inject constructor(
     private val getFacturasUseCase: GetFacturasUseCase,
-    private val filtradoUseCase: FiltradoUseCase,
-    private val repository: FacturaRepository
+    private val filtradoUseCase: FiltradoUseCase
 ) : ViewModel() {
 
-    init {
+    /* init{
         Log.d("facturas", "FacturaListViewModel_init")
-        CoroutineScope(Dispatchers.IO).launch {
-            facturasLista = getFacturasUseCase.invoke(false).map { it.toDatabase() }
+         viewModelScope.launch {
+            val facturasResult  = getFacturasUseCase.invoke(false)
+            facturasLista = facturasResult
+            withContext(Dispatchers.Main) {
+                _facturas.value = facturasResult
+            }
             Log.i("facturas", "la primera vez $facturasLista")
         }
-    }
-
-    private val _facturas = MutableLiveData<List<Factura>>()
-    val facturas: LiveData<List<Factura>> = _facturas
-    private lateinit var facturasLista: List<Entity>
-
+    }*/
+    private val _facturas = MutableStateFlow<List<Factura>>(emptyList())
+    val facturas: StateFlow<List<Factura>> = _facturas
+    lateinit var facturasLista: List<Factura>
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
@@ -50,9 +42,14 @@ class FacturaListViewModel @Inject constructor(
         Log.d("LISTA", "ENTRA EN OBTENER")
         viewModelScope.launch {
             try {
-                val facturasResult = getFacturasUseCase.invoke(mock)
-                facturasLista = facturasResult.map { it.toDatabase() }
-                _facturas.value = facturasResult
+                runCatching { getFacturasUseCase.invoke(mock) }.onSuccess {
+                    facturasLista = it
+                    _facturas.value = it
+                }.onFailure {
+                    _facturas.value = emptyList()
+                    facturasLista = emptyList()
+                }
+
             } catch (e: Exception) {
                 _error.value = "Error al obtener las facturas: ${e.message}"
                 Log.e("FRAN", "Error al obtener las facturas: ${e.message}")

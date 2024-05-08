@@ -120,6 +120,8 @@ class LoginActivity : AppCompatActivity() {
         val pass = prefs?.getString("pass", null)
         val isChecked = prefs?.getBoolean("isChecked", false)
         if (email != null && pass != null && isChecked != null) {
+            //  val intent = Intent(this, PantallaPrincipalActivity::class.java)
+            //startActivity(intent)
             binding.etEmail.setText(email)
             binding.etPassword.setText(pass)
             binding.rememberPass.isChecked = isChecked
@@ -142,7 +144,6 @@ class LoginActivity : AppCompatActivity() {
             prefs.apply()
         }
     }
-
 
 
 }

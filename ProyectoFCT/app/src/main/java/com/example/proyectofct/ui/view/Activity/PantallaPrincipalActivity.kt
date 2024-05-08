@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.proyectofct.R
 import com.example.proyectofct.databinding.ActivityPantallaPrincipalBinding
@@ -18,8 +19,8 @@ import kotlinx.coroutines.runBlocking
 class PantallaPrincipalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPantallaPrincipalBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         remoteConfig()
+        super.onCreate(savedInstanceState)
         binding = ActivityPantallaPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
@@ -62,7 +63,8 @@ class PantallaPrincipalActivity : AppCompatActivity() {
 
                 if (tema) {
                     Log.i("tema", "tema secundario")
-                    setTheme(R.style.Theme_Secundario)
+                    cambiarEstilos()
+                    //setTheme(R.style.Theme_Secundario)
                     Log.d("tema", this.theme.toString())
                 } else {
                     setTheme(R.style.Theme_ProyectoFCT)
@@ -74,5 +76,14 @@ class PantallaPrincipalActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun cambiarEstilos() {
+        binding.root.setBackgroundColor(ContextCompat.getColor(this, R.color.oscuro))
+        binding.titulo.setTextColor(getResources().getColor(R.color.white))
+        binding.txtPractica1.setTextColor(getResources().getColor(R.color.white))
+        binding.practica2.setTextColor(getResources().getColor(R.color.white))
+        binding.navegacion.setTextColor(getResources().getColor(R.color.white))
+        binding.mock.setTextColor(getResources().getColor(R.color.white))
     }
 }

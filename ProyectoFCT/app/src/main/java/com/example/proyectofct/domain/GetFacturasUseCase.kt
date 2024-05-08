@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetFacturasUseCase @Inject constructor(private val repository: Repository) {
     suspend operator fun invoke(switch: Boolean): List<Factura> {
         return if (!switch) {
-            val facturas = repository.getAllFacturasFromApi()
+            val facturas = repository.getAllFacturasFromApi() ?: emptyList()
             if (facturas.isNotEmpty()) {
                 Log.i("FRAN", "Cargué de la API")
                 repository.clearFacturas()
