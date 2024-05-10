@@ -91,4 +91,18 @@ class FacturaListViewModelTest {
         assertEquals(precioMayor, viewModel.getPrecioMayor())
     }
 
+
+    @Test
+    fun `test emptyfacturas`() = runTest {
+        // Given
+        val emptyFacturasList: List<Factura> = emptyList()
+        `when`(getFacturasUseCase.invoke(false)).thenReturn(emptyList())
+        // When
+        viewModel.obtenerFacturas(false)
+        advanceUntilIdle()
+        // Then
+        assertEquals(emptyFacturasList, viewModel.facturas.value)
+    }
+
+
 }
