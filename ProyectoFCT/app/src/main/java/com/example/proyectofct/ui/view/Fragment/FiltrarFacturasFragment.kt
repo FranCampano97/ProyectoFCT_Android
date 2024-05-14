@@ -67,6 +67,9 @@ class FiltrarFacturasFragment : Fragment() {
             binding.btnHasta.setText(R.string.dia_mes)
             binding.checkPendientes.isChecked = false
             binding.checkPagadas.isChecked = false
+            binding.checkAnuladas.isChecked = false
+            binding.checkCuotaFija.isChecked = false
+            binding.checkPlanPago.isChecked = false
             binding.rangeSlider.setValues(0.0f)
         }
         binding.btnDesde.setOnClickListener {

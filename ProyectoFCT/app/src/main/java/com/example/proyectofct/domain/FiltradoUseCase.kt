@@ -54,25 +54,25 @@ class FiltradoUseCase @Inject constructor(private val repository: Repository) {
             } else false
 
 
-            val porChecks = if (!pendiente && !anulada && !cuotaFija && !planPago && pagada && i.estado == "Pagada") {
-                Log.i("facturas", "entro en la 1 de pagada")
-                true
-            } else if (pendiente && !anulada && !cuotaFija && !planPago && !pagada && i.estado == "Pendiente de pago") {
-                Log.i("facturas", "entro en la 2 de pendiente de pago")
-                true
-            } else if (!pendiente && anulada && !cuotaFija && !planPago && !pagada && i.estado == "Anulada") {
-                Log.i("facturas", "entro en de anulada")
-                true
-            }else if (!pendiente && !anulada && cuotaFija && !planPago && !pagada && i.estado == "Cuota Fija") {
-                Log.i("facturas", "entro en de Cuota Fija")
-                true
-            }else if (!pendiente && !anulada && !cuotaFija && planPago && !pagada && i.estado == "Plan de pago") {
-                Log.i("facturas", "entro en de Plan de pago")
-                true
-            }
-            else {
-                false
-            }
+            val porChecks =
+                if (!pendiente && !anulada && !cuotaFija && !planPago && pagada && i.estado == "Pagada") {
+                    Log.i("facturas", "entro en la 1 de pagada")
+                    true
+                } else if (pendiente && !anulada && !cuotaFija && !planPago && !pagada && i.estado == "Pendiente de pago") {
+                    Log.i("facturas", "entro en la 2 de pendiente de pago")
+                    true
+                } else if (!pendiente && anulada && !cuotaFija && !planPago && !pagada && i.estado == "Anulada") {
+                    Log.i("facturas", "entro en de anulada")
+                    true
+                } else if (!pendiente && !anulada && cuotaFija && !planPago && !pagada && i.estado == "Cuota Fija") {
+                    Log.i("facturas", "entro en de Cuota Fija")
+                    true
+                } else if (!pendiente && !anulada && !cuotaFija && planPago && !pagada && i.estado == "Plan de pago") {
+                    Log.i("facturas", "entro en de Plan de pago")
+                    true
+                } else {
+                    false
+                }
 
             //si es por importe solamente.
             if (porImporte && dentroRango && !porChecks && !porBotones && !cumpleFechas && !porFecha) {

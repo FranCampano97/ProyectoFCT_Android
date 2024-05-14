@@ -78,8 +78,8 @@ class FiltradoUseCaseTest {
         }
     }
 
-    @Test  //filtrado por estado.
-    fun `when facturas filtered by estado, should return the correct list`() {
+    @Test  //filtrado por estado_Pagada.
+    fun `when facturas filtered by estado_Pagada, should return the correct list`() {
         runBlocking {
 
             val facturasFromDatabase = listOf(
@@ -105,6 +105,130 @@ class FiltradoUseCaseTest {
             val expectedList = listOf(
                 Factura("Pagada", 00.0f, "28/04/2024"),
                 Factura("Pagada", 00.0f, "26/04/2024")
+            )
+            assertEquals(expectedList, result)
+        }
+    }
+
+    @Test  //filtrado por estado_PendientePago.
+    fun `when facturas filtered by estado_PendientePago, should return the correct list`() {
+        runBlocking {
+
+            val facturasFromDatabase = listOf(
+                Factura("Pagada", 00.0f, "28/04/2024"),
+                Factura("Pendiente de pago", 00.0f, "27/04/2024"),
+                Factura("Pagada", 00.0f, "26/04/2024")
+            )
+
+            `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
+
+
+            val result = filtradoUseCase.filtrado(
+                importe = 00.0f,
+                pagada = false,
+                pendiente = true,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
+                desde = null,
+                hasta = null
+            )
+
+            val expectedList = listOf(
+                Factura("Pendiente de pago", 00.0f, "27/04/2024")
+            )
+            assertEquals(expectedList, result)
+        }
+    }
+
+    @Test  //filtrado por estado cuota fija.
+    fun `when facturas filtered by estado_CuotaFija, should return the correct list`() {
+        runBlocking {
+
+            val facturasFromDatabase = listOf(
+                Factura("Cuota Fija", 00.0f, "28/04/2024"),
+                Factura("Pendiente de pago", 00.0f, "27/04/2024"),
+                Factura("Pagada", 00.0f, "26/04/2024")
+            )
+
+            `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
+
+
+            val result = filtradoUseCase.filtrado(
+                importe = 00.0f,
+                pagada = false,
+                pendiente = false,
+                anulada = false,
+                cuotaFija = true,
+                planPago = false,
+                desde = null,
+                hasta = null
+            )
+
+            val expectedList = listOf(
+                Factura("Cuota Fija", 00.0f, "28/04/2024"),
+            )
+            assertEquals(expectedList, result)
+        }
+    }
+
+    @Test  //filtrado por estado_Anulada.
+    fun `when facturas filtered by estado_Anulada, should return the correct list`() {
+        runBlocking {
+
+            val facturasFromDatabase = listOf(
+                Factura("Cuota Fija", 00.0f, "28/04/2024"),
+                Factura("Pendiente de pago", 00.0f, "27/04/2024"),
+                Factura("Anulada", 00.0f, "26/04/2024")
+            )
+
+            `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
+
+
+            val result = filtradoUseCase.filtrado(
+                importe = 00.0f,
+                pagada = false,
+                pendiente = false,
+                anulada = true,
+                cuotaFija = false,
+                planPago = false,
+                desde = null,
+                hasta = null
+            )
+
+            val expectedList = listOf(
+                Factura("Anulada", 00.0f, "26/04/2024")
+            )
+            assertEquals(expectedList, result)
+        }
+    }
+
+    @Test  //filtrado por estado_PlanPago.
+    fun `when facturas filtered by estado_PlanPago, should return the correct list`() {
+        runBlocking {
+
+            val facturasFromDatabase = listOf(
+                Factura("Plan de pago", 00.0f, "28/04/2024"),
+                Factura("Pendiente de pago", 00.0f, "27/04/2024"),
+                Factura("Anulada", 00.0f, "26/04/2024")
+            )
+
+            `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
+
+
+            val result = filtradoUseCase.filtrado(
+                importe = 00.0f,
+                pagada = false,
+                pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = true,
+                desde = null,
+                hasta = null
+            )
+
+            val expectedList = listOf(
+                Factura("Plan de pago", 00.0f, "28/04/2024")
             )
             assertEquals(expectedList, result)
         }
