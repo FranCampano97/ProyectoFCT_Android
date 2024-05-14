@@ -16,6 +16,9 @@ class FiltradoUseCase @Inject constructor(private val repository: Repository) {
         importe: Float,
         pagada: Boolean,
         pendiente: Boolean,
+        anulada: Boolean,
+        cuotaFija: Boolean,
+        planPago: Boolean,
         desde: Date?,
         hasta: Date?
     ): List<Factura> {
@@ -30,7 +33,7 @@ class FiltradoUseCase @Inject constructor(private val repository: Repository) {
         Log.i("facturas", "el importe es: $importe")
 
         for (i in facturasLista) {
-            porBotones = if (pagada || pendiente) {
+            porBotones = if (pagada || pendiente || anulada || cuotaFija || planPago) {
                 true
             } else false
             dentroRango = false
@@ -51,13 +54,23 @@ class FiltradoUseCase @Inject constructor(private val repository: Repository) {
             } else false
 
 
-            val porChecks = if (!pendiente && pagada && i.estado == "Pagada") {
+            val porChecks = if (!pendiente && !anulada && !cuotaFija && !planPago && pagada && i.estado == "Pagada") {
                 Log.i("facturas", "entro en la 1 de pagada")
                 true
-            } else if (!pagada && pendiente && i.estado == "Pendiente de pago") {
+            } else if (pendiente && !anulada && !cuotaFija && !planPago && !pagada && i.estado == "Pendiente de pago") {
                 Log.i("facturas", "entro en la 2 de pendiente de pago")
                 true
-            } else {
+            } else if (!pendiente && anulada && !cuotaFija && !planPago && !pagada && i.estado == "Anulada") {
+                Log.i("facturas", "entro en de anulada")
+                true
+            }else if (!pendiente && !anulada && cuotaFija && !planPago && !pagada && i.estado == "Cuota Fija") {
+                Log.i("facturas", "entro en de Cuota Fija")
+                true
+            }else if (!pendiente && !anulada && !cuotaFija && planPago && !pagada && i.estado == "Plan de pago") {
+                Log.i("facturas", "entro en de Plan de pago")
+                true
+            }
+            else {
                 false
             }
 

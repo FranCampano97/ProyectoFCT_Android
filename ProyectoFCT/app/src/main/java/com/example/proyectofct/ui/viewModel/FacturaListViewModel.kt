@@ -62,13 +62,16 @@ class FacturaListViewModel @Inject constructor(
         importe: Float,
         pagada: Boolean,
         pendiente: Boolean,
+        anulada: Boolean,
+        cuotaFija: Boolean,
+        planPago: Boolean,
         desde: Date?,
         hasta: Date?
     ) {
         viewModelScope.launch {
             try {
                 val facturasFiltradas =
-                    filtradoUseCase.filtrado(importe, pagada, pendiente, desde, hasta)
+                    filtradoUseCase.filtrado(importe, pagada, pendiente,anulada,cuotaFija,planPago, desde, hasta)
                 _facturas.value = facturasFiltradas
             } catch (e: Exception) {
                 _error.value = "Error al filtrar las facturas: ${e.message}"

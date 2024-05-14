@@ -61,6 +61,9 @@ class FacturaListViewModelTest {
         val importe = 50.0f
         val pagada = true
         val pendiente = false
+        val anulada = false
+        val cuotaFija = false
+        val planPago = false
         val desde: Date? = null
         val hasta: Date? = null
         val facturasOriginales = listOf(
@@ -72,11 +75,22 @@ class FacturaListViewModelTest {
         )
 
         `when`(getFacturasUseCase.invoke(false)).thenReturn(facturasOriginales)
-        `when`(filtradoUseCase.filtrado(importe, pagada, pendiente, desde, hasta))
+        `when`(
+            filtradoUseCase.filtrado(
+                importe,
+                pagada,
+                pendiente,
+                anulada,
+                cuotaFija,
+                planPago,
+                desde,
+                hasta
+            )
+        )
             .thenReturn(facturasFiltradas)
 
         // When
-        viewModel.filtrar(importe, pagada, pendiente, desde, hasta)
+        viewModel.filtrar(importe, pagada, pendiente, anulada, cuotaFija, planPago, desde, hasta)
         advanceUntilIdle()
         // Then
         assertEquals(facturasFiltradas, viewModel.facturas.value)

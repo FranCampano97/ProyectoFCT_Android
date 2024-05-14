@@ -9,7 +9,7 @@ class FacturasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
     fun bind(response: FacturaModel, onItemSelected: () -> Unit) {
-        if (response.estado.equals("Pendiente de pago")) {
+        if (!response.estado.equals("Pagada")) {
             binding.tvEstado.text = response.estado
         } else binding.tvEstado.text = ""
 

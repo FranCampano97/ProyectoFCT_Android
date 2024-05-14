@@ -107,6 +107,9 @@ class FiltrarFacturasFragment : Fragment() {
                 importe,
                 binding.checkPagadas.isChecked,
                 binding.checkPendientes.isChecked,
+                binding.checkAnuladas.isChecked,
+                binding.checkCuotaFija.isChecked,
+                binding.checkPlanPago.isChecked,
                 desdeDate,
                 hastaDate
             )

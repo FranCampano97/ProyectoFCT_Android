@@ -33,6 +33,9 @@ class FiltradoUseCaseTest {
                 importe = 0.0f,
                 pagada = true,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null
             )
@@ -59,6 +62,9 @@ class FiltradoUseCaseTest {
                 importe = 50.0f,
                 pagada = false,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null
             )
@@ -89,6 +95,9 @@ class FiltradoUseCaseTest {
                 importe = 00.0f,
                 pagada = true,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null
             )
@@ -118,6 +127,9 @@ class FiltradoUseCaseTest {
                 importe = 00.0f,
                 pagada = false,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = desde,
                 hasta = hasta
             )
@@ -149,6 +161,9 @@ class FiltradoUseCaseTest {
                 importe = 25.0f,
                 pagada = true,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = desde,
                 hasta = hasta
             )
@@ -171,6 +186,9 @@ class FiltradoUseCaseTest {
                 importe = 0f,
                 pagada = true,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null,
             )
@@ -193,6 +211,9 @@ class FiltradoUseCaseTest {
                 importe = 25.0f,
                 pagada = true,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null
             )
@@ -220,6 +241,9 @@ class FiltradoUseCaseTest {
                 importe = 25.0f,
                 pagada = false,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = desde,
                 hasta = hasta
             )
@@ -250,6 +274,9 @@ class FiltradoUseCaseTest {
                 importe = 00.0f,
                 pagada = false,
                 pendiente = true,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = desde,
                 hasta = hasta
             )
@@ -271,6 +298,9 @@ class FiltradoUseCaseTest {
                 importe = 0.0f,
                 pagada = false,
                 pendiente = false,
+                anulada = false,
+                cuotaFija = false,
+                planPago = false,
                 desde = null,
                 hasta = null
             )
