@@ -50,12 +50,14 @@ class FacturaListActivity : AppCompatActivity() {
         binding = ActivityFacturaListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val usarMock = intent.getBooleanExtra("mock", false)
+        val usarKtor = intent.getBooleanExtra("ktor", false)
 
         initUI()
         val fragment = FacturaListFragment()
         val fragmentManager = supportFragmentManager
         val bundle = Bundle()
         bundle.putBoolean("mock", usarMock)
+        bundle.putBoolean("ktor", usarKtor)
         fragment.arguments = bundle
 
         val transaction = fragmentManager.beginTransaction()

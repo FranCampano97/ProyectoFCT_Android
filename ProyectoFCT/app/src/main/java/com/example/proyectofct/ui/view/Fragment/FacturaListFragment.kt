@@ -60,7 +60,9 @@ class FacturaListFragment : Fragment() {
         }
         val usarMock =
             arguments?.getBoolean("mock", false) ?: false // Obtener el valor del switch del bundle
-        Log.i("mock", "valor del switch: $usarMock")
+        val usarKtor =
+            arguments?.getBoolean("ktor", false) ?: false // Obtener el valor del switch del bundle
+        Log.i("ktor", "Mock: $usarMock, Ktor: $usarKtor")
 
 
         // Observa el LiveData en el ViewModel
@@ -78,8 +80,10 @@ class FacturaListFragment : Fragment() {
                 } else binding.txtNoResultados.isVisible = false
             }
         }
+
+
         if (primeravez) {
-            viewModel.obtenerFacturas(usarMock)
+            viewModel.obtenerFacturas(usarMock, usarKtor)
             primeravez = false
         }
     }

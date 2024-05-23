@@ -39,11 +39,11 @@ class FacturaListViewModel @Inject constructor(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    fun obtenerFacturas(mock: Boolean) {
+    fun obtenerFacturas(mock: Boolean,ktor:Boolean) {
         Log.d("LISTA", "ENTRA EN OBTENER")
         viewModelScope.launch {
             try {
-                runCatching { getFacturasUseCase.invoke(mock) }.onSuccess {
+                runCatching { getFacturasUseCase.invoke(mock,ktor) }.onSuccess {
                     facturasLista = it
                     _facturas.value = it
                 }.onFailure {

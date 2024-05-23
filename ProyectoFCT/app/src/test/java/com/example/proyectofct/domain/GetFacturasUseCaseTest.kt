@@ -32,7 +32,7 @@ class GetFacturasUseCaseTest {
             `when`(repository.getAllFacturasFromMock()).thenReturn(facturasFromMock)
 
             // Act
-            val result = facturaUseCase.invoke(true)
+            val result = facturaUseCase.invoke(true, false)
 
             // Assert
             assertEquals(facturasFromMock, result)
@@ -51,7 +51,7 @@ class GetFacturasUseCaseTest {
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
 
             // Act
-            val result = facturaUseCase.invoke(false)
+            val result = facturaUseCase.invoke(false, false)
 
             // Assert
             assertEquals(facturasFromDatabase, result)
@@ -66,7 +66,7 @@ class GetFacturasUseCaseTest {
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(emptyList())
 
             // Act
-            val result = facturaUseCase.invoke(false)
+            val result = facturaUseCase.invoke(false, false)
 
             // Assert
             assertEquals(emptyList<Factura>(), result)

@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:gravity="center_horizontal"
+            android:textStyle="italic"
             android:text="@string/crea_tu_cuenta" />
 
         <EditText

@@ -6,6 +6,7 @@ plugins {
     id("com.google.gms.google-services")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -38,8 +39,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    testOptions{
-        unitTests.isReturnDefaultValues=true
+    testOptions {
+        unitTests.isReturnDefaultValues = true
     }
 
     buildFeatures {
@@ -60,8 +61,8 @@ dependencies {
     implementation(libs.androidx.annotation)
     //firebase
     implementation(libs.firebase.auth.ktx)
-    implementation ("com.google.firebase:firebase-config-ktx")
-    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation(libs.core.ktx)
 
     testImplementation(libs.junit)
@@ -92,8 +93,17 @@ dependencies {
     implementation("co.infinum:retromock:1.1.1")
 
     //mockito
-    testImplementation ("org.mockito:mockito-core:3.+")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
-    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.mockito:mockito-core:3.+")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
 
+
+    //ktor
+    implementation("io.ktor:ktor-client-core:2.3.1")
+    implementation("io.ktor:ktor-client-cio:2.3.1")
+    implementation("io.ktor:ktor-client-serialization:2.3.1")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.1")
+    implementation("io.ktor:ktor-client-logging:2.3.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.1")
+    implementation("io.ktor:ktor-client-json:2.3.1")
 }

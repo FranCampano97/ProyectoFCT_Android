@@ -132,6 +132,33 @@
             android:backgroundTint="@color/white" />
 
     </LinearLayout>
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ktor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:text="@string/activar_ktor"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <Switch
+            android:id="@+id/switchKtor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>

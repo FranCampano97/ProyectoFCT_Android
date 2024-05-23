@@ -46,10 +46,10 @@ class FacturaListViewModelTest {
             Factura("pagada", 50.0f, "28/04/2024")
         )
 
-        `when`(getFacturasUseCase.invoke(false)).thenReturn(facturas)
+        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(facturas)
 
         // When
-        viewModel.obtenerFacturas(false)
+        viewModel.obtenerFacturas(false,false)
         advanceUntilIdle()
         // Then
         assertEquals(facturas, viewModel.facturas.value)
@@ -74,7 +74,7 @@ class FacturaListViewModelTest {
             Factura("Pagada", 45.0f, "15/07/2024")
         )
 
-        `when`(getFacturasUseCase.invoke(false)).thenReturn(facturasOriginales)
+        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(facturasOriginales)
         `when`(
             filtradoUseCase.filtrado(
                 importe,
@@ -110,9 +110,9 @@ class FacturaListViewModelTest {
     fun `test emptyfacturas`() = runTest {
         // Given
         val emptyFacturasList: List<Factura> = emptyList()
-        `when`(getFacturasUseCase.invoke(false)).thenReturn(emptyList())
+        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(emptyList())
         // When
-        viewModel.obtenerFacturas(false)
+        viewModel.obtenerFacturas(false,false)
         advanceUntilIdle()
         // Then
         assertEquals(emptyFacturasList, viewModel.facturas.value)

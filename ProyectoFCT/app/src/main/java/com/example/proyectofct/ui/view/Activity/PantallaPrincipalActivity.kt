@@ -30,6 +30,8 @@ class PantallaPrincipalActivity : AppCompatActivity() {
         binding.icPractica1.setOnClickListener {
             intent = Intent(this, FacturaListActivity::class.java)
             intent.putExtra("mock", binding.switchMock.isChecked)
+            intent.putExtra("ktor", binding.switchKtor.isChecked)
+
             startActivity(intent)
         }
         binding.icPractica2.setOnClickListener {
