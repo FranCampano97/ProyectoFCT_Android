@@ -31,7 +31,7 @@ class RegisterUseCaseTest {
 
     @Test
     fun registrarUsuario_SuccessfulRegistration() {
-        val email = "test@example.com"
+        val email = "test@ejemplo.com"
         val password = "test123"
         val taskMock: Task<AuthResult> = Mockito.mock(Task::class.java) as Task<AuthResult>
 
@@ -46,7 +46,7 @@ class RegisterUseCaseTest {
 
     @Test
     fun registrarUsuario_FailedRegistration() {
-        val email = "test@example.com"
+        val email = "test@ejemplo.com"
         val password = "test123"
         val taskMock: Task<AuthResult> = Mockito.mock(Task::class.java) as Task<AuthResult>
 

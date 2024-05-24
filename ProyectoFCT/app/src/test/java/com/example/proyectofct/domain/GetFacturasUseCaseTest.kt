@@ -24,25 +24,46 @@ class GetFacturasUseCaseTest {
     @Test
     fun `when switch is true, should return facturas from mock`() {
         runBlocking {
-            // Arrange
             val facturasFromMock = listOf(
                 Factura("pagada", 300.0f, "2024-04-28"),
                 Factura("pendiente", 400.0f, "2024-04-27")
             )
             `when`(repository.getAllFacturasFromMock()).thenReturn(facturasFromMock)
 
-            // Act
             val result = facturaUseCase.invoke(true, false)
 
-            // Assert
             assertEquals(facturasFromMock, result)
+        }
+    }
+
+    @Test
+    fun `when switch_ktor is true, should return facturas from ktor`() {
+        runBlocking {
+            val facturasFromKtor = listOf(
+                Factura("pagada", 300.0f, "2024-04-28"),
+                Factura("pendiente", 400.0f, "2024-04-27")
+            )
+            `when`(repository.getAllFacturasFromKtor()).thenReturn(facturasFromKtor)
+
+            val result = facturaUseCase.invoke(false, true)
+
+            assertEquals(facturasFromKtor, result)
+        }
+    }
+
+    @Test
+    fun `when ktor return emptylist`() {
+        runBlocking {
+            val facturasFromKtor = emptyList<Factura>()
+            `when`(repository.getAllFacturasFromKtor()).thenReturn(facturasFromKtor)
+
+            assertEquals(facturasFromKtor, emptyList<Factura>())
         }
     }
 
     @Test
     fun `when no facturas from API, should return facturas from database`() {
         runBlocking {
-            // Arrange
             val facturasFromDatabase = listOf(
                 Factura("pagada", 50.5f, "2024-04-28"),
                 Factura("pendiente", 45.0f, "2024-04-27")
@@ -50,10 +71,8 @@ class GetFacturasUseCaseTest {
             `when`(repository.getAllFacturasFromApi()).thenReturn(emptyList())
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
 
-            // Act
             val result = facturaUseCase.invoke(false, false)
 
-            // Assert
             assertEquals(facturasFromDatabase, result)
         }
     }
@@ -61,14 +80,11 @@ class GetFacturasUseCaseTest {
     @Test
     fun `when no facturas from API or database, should return empty list`() {
         runBlocking {
-            // Arrange
             `when`(repository.getAllFacturasFromApi()).thenReturn(emptyList())
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(emptyList())
 
-            // Act
             val result = facturaUseCase.invoke(false, false)
 
-            // Assert
             assertEquals(emptyList<Factura>(), result)
         }
     }

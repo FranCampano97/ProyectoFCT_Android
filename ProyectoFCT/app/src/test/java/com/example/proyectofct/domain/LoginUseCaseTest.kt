@@ -35,7 +35,7 @@ class LoginUseCaseTest {
 
     @Test
     fun iniciarUsuario_SuccessfulLogin() {
-        val email = "test@example.com"
+        val email = "test@ejemplo.com"
         val password = "test123"
         val taskMock: Task<AuthResult> = mock(Task::class.java) as Task<AuthResult>
         `when`(taskMock.isSuccessful).thenReturn(true)
@@ -48,7 +48,7 @@ class LoginUseCaseTest {
 
     @Test
     fun iniciarUsuario_FailedLogin() {
-        val email = "test@example.com"
+        val email = "test@ejemplo.com"
         val password = "invalidPassword"
         val taskMock: Task<AuthResult> = mock(Task::class.java) as Task<AuthResult>
         `when`(taskMock.isSuccessful).thenReturn(false)

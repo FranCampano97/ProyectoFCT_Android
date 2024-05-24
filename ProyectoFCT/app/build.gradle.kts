@@ -106,4 +106,6 @@ dependencies {
     implementation("io.ktor:ktor-client-logging:2.3.1")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.1")
     implementation("io.ktor:ktor-client-json:2.3.1")
+    testImplementation("io.ktor:ktor-client-mock:2.3.1")
+    testImplementation("io.ktor:ktor-server-tests:2.3.1")
 }

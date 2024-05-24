@@ -16,7 +16,7 @@ class GetFacturasUseCase @Inject constructor(private val repository: Repository)
                 if (facturas.isNotEmpty()) {
                     repository.clearFacturas()
                     repository.insertFacturas(facturas.map { it.toDatabase() })
-                    repository.getAllFacturasFromDatabase()
+                    facturas
                 } else {
                     repository.getAllFacturasFromDatabase()
                 }

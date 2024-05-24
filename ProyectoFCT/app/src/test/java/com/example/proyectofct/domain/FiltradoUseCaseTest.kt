@@ -25,10 +25,8 @@ class FiltradoUseCaseTest {
     @Test
     fun `when no facturas available, should return empty list`() {
         runBlocking {
-            // Arrange
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(emptyList())
 
-            // Act
             val result = filtradoUseCase.filtrado(
                 importe = 0.0f,
                 pagada = true,
@@ -39,8 +37,6 @@ class FiltradoUseCaseTest {
                 desde = null,
                 hasta = null
             )
-
-            // Assert
             assertEquals(emptyList<Factura>(), result)
         }
     }
@@ -48,16 +44,12 @@ class FiltradoUseCaseTest {
     @Test //filtrado por importe
     fun `when facturas filtered by importe, should return correct list`() {
         runBlocking {
-
             val facturasFromDatabase = listOf(
                 Factura("pagada", 50.0f, "28/04/2024"),
                 Factura("pendiente", 45.0f, "27/04/2024"),
                 Factura("pagada", 60.0f, "26/04/2024")
             )
-
             `when`(repository.getAllFacturasFromDatabase()).thenReturn(facturasFromDatabase)
-
-            // Act
             val result = filtradoUseCase.filtrado(
                 importe = 50.0f,
                 pagada = false,
@@ -68,8 +60,6 @@ class FiltradoUseCaseTest {
                 desde = null,
                 hasta = null
             )
-
-            // Assert
             val expectedList = listOf(
                 Factura("pagada", 50.0f, "28/04/2024"),
                 Factura("pendiente", 45.0f, "27/04/2024")
@@ -432,7 +422,6 @@ class FiltradoUseCaseTest {
             assertEquals(emptyList<Factura>(), result)
         }
     }
-
     private fun generarFacturas(cantidad: Int): List<Factura> {
         return List(cantidad) {
             Factura("Pagada", 15.0f, "28/04/2024")
