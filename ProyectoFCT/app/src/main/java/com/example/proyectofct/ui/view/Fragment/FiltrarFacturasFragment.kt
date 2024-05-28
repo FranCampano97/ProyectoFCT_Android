@@ -81,15 +81,20 @@ class FiltrarFacturasFragment : Fragment() {
         binding.rangeSlider.valueFrom = 0f
 
         CoroutineScope(Dispatchers.IO).launch {
-            val precioMayor = viewModel.getPrecioMayor()
-            if (precioMayor != null) {
-                importeMayor = precioMayor.toFloat()
-            }else     importeMayor = 0.0f
+            try {
+                val precioMayor = viewModel.getPrecioMayor()
+                val importeMayor = precioMayor?.toFloat() ?: 0.0f
 
-            binding.rangeSlider.valueTo = importeMayor
-            binding.precioSeleccionado.setText("0 € - $importeMayor €")
-            // binding.rangeSlider.setValues(0f, importeMayor)
+                withContext(Dispatchers.Main) {
+                    binding.rangeSlider.valueTo = importeMayor
+                    binding.precioSeleccionado.text = "0 € - $importeMayor €"
+                }
+            } catch (e: Exception) {
+                // Maneja la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error
+                Log.e("TuFragment", "Error al obtener el precio mayor", e)
+            }
         }
+
         binding.rangeSlider.addOnChangeListener { slider, _, _ ->
             importe = slider.values[0].toFloat()
             val precio = importe.toString()

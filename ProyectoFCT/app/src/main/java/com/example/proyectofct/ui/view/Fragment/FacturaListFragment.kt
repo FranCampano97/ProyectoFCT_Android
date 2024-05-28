@@ -20,6 +20,7 @@ import com.example.proyectofct.domain.model.toFacturaModel
 import com.example.proyectofct.ui.view.Activity.PantallaPrincipalActivity
 import com.example.proyectofct.ui.viewModel.FacturaListViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class FacturaListFragment : Fragment() {
@@ -83,8 +84,13 @@ class FacturaListFragment : Fragment() {
 
 
         if (primeravez) {
-            viewModel.obtenerFacturas(usarMock, usarKtor)
-            primeravez = false
+            runBlocking {
+                viewModel.obtenerFacturas(usarMock, usarKtor)
+                primeravez = false
+                //viewModel.getPrecioMayor()
+
+            }
+
         }
     }
 
