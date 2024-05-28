@@ -81,7 +81,11 @@ class FiltrarFacturasFragment : Fragment() {
         binding.rangeSlider.valueFrom = 0f
 
         CoroutineScope(Dispatchers.IO).launch {
-            importeMayor = viewModel.getPrecioMayor()
+            val precioMayor = viewModel.getPrecioMayor()
+            if (precioMayor != null) {
+                importeMayor = precioMayor.toFloat()
+            }else     importeMayor = 0.0f
+
             binding.rangeSlider.valueTo = importeMayor
             binding.precioSeleccionado.setText("0 € - $importeMayor €")
             // binding.rangeSlider.setValues(0f, importeMayor)

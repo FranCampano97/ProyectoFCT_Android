@@ -18,7 +18,11 @@ class GetFacturasUseCase @Inject constructor(private val repository: Repository)
                     repository.insertFacturas(facturas.map { it.toDatabase() })
                     facturas
                 } else {
+                    val facturas2 = repository.getAllFacturasFromMock()
+                    repository.clearFacturas()
+                    repository.insertFacturas(facturas.map { it.toDatabase() })
                     repository.getAllFacturasFromDatabase()
+                    facturas2
                 }
             }
 
@@ -47,6 +51,6 @@ class GetFacturasUseCase @Inject constructor(private val repository: Repository)
 
 
     suspend fun getPrecioMayor(): Float {
-        return repository.getPrecioMayor()
+        return repository.getPrecioMayor() ?: 0.0f
     }
 }
