@@ -49,14 +49,11 @@ class GetFacturasUseCase @Inject constructor(private val repository: Repository)
         }
     }
 
-    suspend fun getPrecioMayor(): Float {
+    suspend fun getPrecioMayor(): Float? {
         val precio = repository.getPrecioMayor()
-        return if (precio != null) {
-            precio.toFloat()
-        } else {
-            0.0f
-        }
+        return precio?.toFloat() ?: 0.0f
     }
+
 
 
 }

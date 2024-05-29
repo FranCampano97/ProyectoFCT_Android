@@ -87,8 +87,6 @@ class FacturaListFragment : Fragment() {
             runBlocking {
                 viewModel.obtenerFacturas(usarMock, usarKtor)
                 primeravez = false
-                //viewModel.getPrecioMayor()
-
             }
 
         }

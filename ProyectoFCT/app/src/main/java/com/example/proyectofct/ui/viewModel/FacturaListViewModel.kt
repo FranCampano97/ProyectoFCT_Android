@@ -89,7 +89,7 @@ class FacturaListViewModel @Inject constructor(
         }
     }
 
-    suspend fun getPrecioMayor(): Float {
+    suspend fun getPrecioMayor(): Float? {
         return getFacturasUseCase.getPrecioMayor()
     }
 }

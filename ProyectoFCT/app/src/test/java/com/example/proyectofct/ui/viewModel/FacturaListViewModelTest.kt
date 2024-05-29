@@ -45,9 +45,9 @@ class FacturaListViewModelTest {
             Factura("pagada", 50.0f, "28/04/2024")
         )
 
-        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(facturas)
+        `when`(getFacturasUseCase.invoke(false, false)).thenReturn(facturas)
 
-        viewModel.obtenerFacturas(false,false)
+        viewModel.obtenerFacturas(false, false)
         advanceUntilIdle()
         assertEquals(facturas, viewModel.facturas.value)
     }
@@ -70,7 +70,7 @@ class FacturaListViewModelTest {
             Factura("Pagada", 45.0f, "15/07/2024")
         )
 
-        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(facturasOriginales)
+        `when`(getFacturasUseCase.invoke(false, false)).thenReturn(facturasOriginales)
         `when`(
             filtradoUseCase.filtrado(
                 importe,
@@ -98,15 +98,29 @@ class FacturaListViewModelTest {
         assertEquals(precioMayor, viewModel.getPrecioMayor())
     }
 
+    @Test
+    fun `when getPrecioMayor returns valid price`() = runTest {
+        val precioMayor = 10.0f
+        `when`(getFacturasUseCase.getPrecioMayor()).thenReturn(precioMayor)
+        advanceUntilIdle()
+        val result = viewModel.getPrecioMayor()
+        assertEquals(precioMayor, result)
+    }
+
+    @Test
+    fun `when getPrecioMayor returns null`() = runTest {
+        `when`(getFacturasUseCase.getPrecioMayor()).thenReturn(null)
+        advanceUntilIdle()
+        val result = viewModel.getPrecioMayor()
+        assertEquals(0.0f, result)
+    }
 
     @Test
     fun `test emptyfacturas`() = runTest {
         val emptyFacturasList: List<Factura> = emptyList()
-        `when`(getFacturasUseCase.invoke(false,false)).thenReturn(emptyList())
-        viewModel.obtenerFacturas(false,false)
+        `when`(getFacturasUseCase.invoke(false, false)).thenReturn(emptyList())
+        viewModel.obtenerFacturas(false, false)
         advanceUntilIdle()
         assertEquals(emptyFacturasList, viewModel.facturas.value)
     }
-
-
 }

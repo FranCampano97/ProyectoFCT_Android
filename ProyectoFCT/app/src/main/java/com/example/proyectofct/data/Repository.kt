@@ -14,5 +14,5 @@ interface Repository {
     suspend fun clearFacturas() {
     }
 
-    suspend fun getPrecioMayor(): Float
+    suspend fun getPrecioMayor(): Float?
 }

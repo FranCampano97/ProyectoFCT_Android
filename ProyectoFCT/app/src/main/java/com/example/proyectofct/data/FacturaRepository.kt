@@ -45,7 +45,7 @@ class FacturaRepository @Inject constructor(
         return response.map { it.toDomain() }
     }
 
-    override suspend fun getPrecioMayor(): Float {
+    override suspend fun getPrecioMayor(): Float? {
         return facturaDao.getPrecioMasAlto()
     }
 }

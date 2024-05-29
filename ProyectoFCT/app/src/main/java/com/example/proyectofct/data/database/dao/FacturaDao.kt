@@ -29,7 +29,7 @@ interface FacturaDao {
 
     //valor mayor
     @Query("SELECT MAX(importeOrdenacion) FROM factura_table")
-    suspend fun getPrecioMasAlto(): Float
+    suspend fun getPrecioMasAlto(): Float?
 
 
 }
