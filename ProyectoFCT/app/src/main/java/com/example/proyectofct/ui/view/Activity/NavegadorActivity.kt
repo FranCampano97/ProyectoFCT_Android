@@ -20,18 +20,40 @@ class NavegadorActivity : AppCompatActivity() {
 
         binding.btnExterno.setOnClickListener {
             binding.webviewBien.visibility = View.GONE
-            val url = "https://www.iberdrola.es"
+            val url = "https://www.iberdrola.com"
             val parse = Uri.parse(url)
-            val intent = Intent(Intent.ACTION_VIEW,parse)
+            val intent = Intent(Intent.ACTION_VIEW, parse)
             startActivity(intent)
         }
         binding.btnWebview.setOnClickListener {
-            binding.webviewBien.loadUrl("https://www.iberdrola.es")
+
+            binding.progressBar.visibility = View.VISIBLE
+
+
+            binding.webviewBien.webViewClient = object : WebViewClient() {
+                override fun onPageStarted(
+                    view: WebView?,
+                    url: String?,
+                    favicon: android.graphics.Bitmap?
+                ) {
+                    super.onPageStarted(view, url, favicon)
+                    binding.progressBar.visibility = View.GONE
+
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                }
+
+
+            }
+            binding.webviewBien.loadUrl("https://www.iberdrola.com")
             binding.webviewBien.visibility = View.VISIBLE
         }
         binding.btnBack.setOnClickListener {
             finish()
         }
+
 
     }
 }

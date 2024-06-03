@@ -2,36 +2,23 @@ package com.example.proyectofct.ui.view.Fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.viewModelScope
-import androidx.room.RoomDatabase
 import com.example.proyectofct.R
-import com.example.proyectofct.data.FacturaRepository
-import com.example.proyectofct.data.database.dao.FacturaDao
-import com.example.proyectofct.data.database.facturaDatabase
 import com.example.proyectofct.data.model.FacturaAdapter
 import com.example.proyectofct.databinding.FragmentFiltrarFacturasBinding
-import com.example.proyectofct.di.RoomModule
-import com.example.proyectofct.domain.GetFacturasUseCase
 import com.example.proyectofct.domain.model.Factura
-import com.example.proyectofct.ui.view.Activity.FacturaListActivity
 import com.example.proyectofct.ui.viewModel.FacturaListViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
-import javax.inject.Inject
 
 class FiltrarFacturasFragment : Fragment() {
     private var _binding: FragmentFiltrarFacturasBinding? = null
@@ -84,14 +71,13 @@ class FiltrarFacturasFragment : Fragment() {
             try {
                 val precioMayor = viewModel.getPrecioMayor()
                 val importeMayor = precioMayor?.toFloat() ?: 0.0f
-
+                println(precioMayor)
                 withContext(Dispatchers.Main) {
                     binding.rangeSlider.valueTo = importeMayor
                     binding.precioSeleccionado.text = "0 € - $importeMayor €"
                 }
             } catch (e: Exception) {
-                // Maneja la excepción de manera adecuada, por ejemplo, mostrando un mensaje de error
-                Log.e("TuFragment", "Error al obtener el precio mayor", e)
+                Log.e("fran", "Error al obtener el precio mayor", e)
             }
         }
 
